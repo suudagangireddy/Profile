@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+</head>
+<body style="margin:0;background:#eee">
+<canvas id="c"></canvas>
+<div id="text" style="white-space:pre-wrap;font-family:monospace;font-size:11px;padding:10px;background:white;margin-top:10px"></div>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+async function load() {
+  const pdf = await pdfjsLib.getDocument('uploads/Gangi_Reddy_Suuda_2026.pdf').promise;
+  let allText = '';
+  for (let i = 1; i <= pdf.numPages; i++) {
+    const page = await pdf.getPage(i);
+    const canvas = document.getElementById('c');
+    const vp = page.getViewport({scale: 1.5});
+    canvas.width = vp.width; canvas.height = vp.height;
+    await page.render({canvasContext: canvas.getContext('2d'), viewport: vp}).promise;
+    const tc = await page.getTextContent();
+    allText += tc.items.map(x => x.str).join(' ') + '\n';
+  }
+  document.getElementById('text').textContent = allText;
+}
+load();
+</script>
+</body>
+</html>

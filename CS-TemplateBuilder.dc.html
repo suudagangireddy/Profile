@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<div id="cs-pw-gate" style="position:fixed;inset:0;z-index:9999;background:#0D0D0D;display:flex;align-items:center;justify-content:center;padding:24px;font-family:'Outfit',sans-serif;">
+  <div style="width:100%;max-width:380px;">
+    <div style="width:40px;height:40px;background:#A8FF3E;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#0D0D0D;">GR</span>
+    </div>
+    <h2 style="font-size:24px;font-weight:800;color:#fff;margin:0 0 8px;letter-spacing:-0.02em;">Protected case study</h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.4);margin:0 0 28px;">Enter the access password to view this project.</p>
+    <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:8px;">Password</label>
+    <input id="cs-pw-inp" type="password" placeholder="••••••••••" style="width:100%;font-family:'Outfit',sans-serif;font-size:15px;color:#fff;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:13px 16px;outline:none;box-sizing:border-box;margin-bottom:8px;transition:border-color 0.15s;">
+    <p id="cs-pw-err" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#FF6B6B;letter-spacing:0.06em;margin:0 0 10px;text-transform:uppercase;display:none;">Incorrect password — try again</p>
+    <button id="cs-pw-btn" style="width:100%;background:#A8FF3E;color:#0D0D0D;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:8px;border:none;cursor:pointer;">Enter project →</button>
+  </div>
+</div>
+
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>*, *::before, *::after { box-sizing: border-box; } html, body { margin: 0; padding: 0; background: #0D0D0D; } a { text-decoration: none; color: inherit; }
+    @media (max-width:768px) {
+      section { padding-left:20px !important; padding-right:20px !important; }
+      nav { padding:0 20px !important; }
+      .cs-stats, .cs-2col, .cs-3col, .cs-4col, .cs-img2col { grid-template-columns:1fr !important; gap:0 !important; }
+      .cs-stats > div { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.08) !important; }
+      .cs-img2col { gap:16px !important; }
+      .cs-dd-grid { grid-template-columns:1fr !important; }
+      .cs-dd-grid > div { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.08) !important; padding:28px 0 !important; }
+      .cs-mock { display:none !important; }
+      .cs-nav-footer { flex-direction:column !important; gap:16px !important; }
+    }
+    </style>
+  <script>
+(function(){
+  function initGate(){
+    var gate=document.getElementById('cs-pw-gate');
+    if(!gate)return;
+    if(sessionStorage.getItem('pf_ok')==='1'){gate.remove();return;}
+    var inp=document.getElementById('cs-pw-inp');
+    var err=document.getElementById('cs-pw-err');
+    var btn=document.getElementById('cs-pw-btn');
+    function tryPw(){
+      if(inp.value==='Access@1'){
+        sessionStorage.setItem('pf_ok','1');
+        gate.style.opacity='0';gate.style.transition='opacity 0.3s';
+        setTimeout(function(){gate.remove();},300);
+      } else {
+        err.style.display='block';
+        inp.style.borderColor='#FF6B6B';
+        setTimeout(function(){inp.style.borderColor='rgba(255,255,255,0.12)';},1000);
+      }
+    }
+    btn.addEventListener('click',tryPw);
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryPw();});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initGate);}
+  else{setTimeout(initGate,100);}
+})();
+  </script>
+</helmet>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;align-items:center;padding:0 44px;justify-content:space-between;background:#0D0D0D;border-bottom:1px solid rgba(255,255,255,0.07);">
+  <a href="Portfolio.dc.html" style="display:flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Work</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:0.12em;text-transform:uppercase;">Case Study</span>
+    <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.25);letter-spacing:-0.01em;">04</span>
+  </div>
+  <a href="Profile.dc.html" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Profile</a>
+</nav>
+
+<!-- HERO -->
+<section style="background:#0D0D0D;padding:120px 48px 80px;position:relative;overflow:hidden;">
+  <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#A8FF3E;"></div>
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 24px;">Brane Enterprises · 2019–2024 · Lead Designer</p>
+    <h1 style="font-family:'Syne',sans-serif;font-size:clamp(48px,7vw,88px);font-weight:800;color:#fff;line-height:0.95;letter-spacing:-0.03em;margin:0 0 28px;max-width:900px;">Dynamic Template Builder</h1>
+    <p style="font-family:'Inter',sans-serif;font-size:18px;color:rgba(255,255,255,0.55);line-height:1.65;max-width:620px;margin:0 0 52px;">Visual no-code CMS for building responsive websites, invoices, email and report templates — drag-and-drop, markdown-first, production-ready output for non-technical teams.</p>
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px;">Domain</p><p style="font-family:'Inter',sans-serif;font-size:15px;color:#fff;margin:0;font-weight:500;">No-Code · Visual CMS · Template Design</p></div>
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px;">Outputs</p><p style="font-family:'Inter',sans-serif;font-size:15px;color:#fff;margin:0;font-weight:500;">Websites · Invoices · Emails · Reports</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section style="background:#111;border-top:1px solid rgba(255,255,255,0.04);padding:48px;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:0;" class="cs-stats" style="border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden;">
+    <div style="padding:28px 32px;border-right:1px solid rgba(255,255,255,0.06);"><p style="font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">4<span style="color:#A8FF3E;font-size:28px;"> output</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Types supported</p></div>
+    <div style="padding:28px 32px;border-right:1px solid rgba(255,255,255,0.06);"><p style="font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">15<span style="color:#A8FF3E;font-size:28px;">+</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Component library</p></div>
+    <div style="padding:28px 32px;border-right:1px solid rgba(255,255,255,0.06);"><p style="font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">Zero<span style="color:#A8FF3E;font-size:28px;"> code</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Required for users</p></div>
+    <div style="padding:28px 32px;"><p style="font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">100<span style="color:#A8FF3E;font-size:28px;">%</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Responsive output</p></div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section style="background:#F7F5F0;padding:100px 48px;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="cs-2col" style="unused:0;">
+    <div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0D0D0D;text-transform:uppercase;margin:0 0 16px;">The Problem</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:800;color:#0D0D0D;margin:0 0 24px;line-height:1.1;letter-spacing:-0.02em;">Enterprise teams needed polished output without knowing how to design or code.</h2>
+      <p style="font-family:'Outfit',sans-serif;font-size:16px;color:#5A5A5A;line-height:1.75;margin:0 0 20px;">As Brane's no-code platform generated enterprise apps, businesses also needed branded websites, invoice templates, email communications, and reports. But they had no designers or developers to create them.</p>
+      <p style="font-family:'Outfit',sans-serif;font-size:16px;color:#5A5A5A;line-height:1.75;margin:0;">My task: design a visual CMS where a business analyst with zero design knowledge could build production-ready, branded output in minutes.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="background:#fff;border:1px solid #E8E4DC;border-radius:8px;padding:24px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 14px;">Output types needed</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="background:#0D0D0D;color:#A8FF3E;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:20px;">Websites</span>
+          <span style="background:#F7F5F0;color:#0D0D0D;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:20px;border:1px solid #E8E4DC;">Invoices</span>
+          <span style="background:#F7F5F0;color:#0D0D0D;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:20px;border:1px solid #E8E4DC;">Email templates</span>
+          <span style="background:#F7F5F0;color:#0D0D0D;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:20px;border:1px solid #E8E4DC;">Reports</span>
+          <span style="background:#F7F5F0;color:#0D0D0D;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:20px;border:1px solid #E8E4DC;">Certificates</span>
+        </div>
+      </div>
+      <div style="background:#0D0D0D;border-radius:8px;padding:24px;"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#A8FF3E;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 10px;">Design Constraint</p><p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(255,255,255,0.8);line-height:1.65;margin:0;">Must work for users with zero design or development background — a business analyst should be fully self-sufficient.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SCREENSHOT 1: Main Builder Canvas -->
+<section style="background:#F7F5F0;padding:80px 48px;display:none;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0D0D0D;text-transform:uppercase;margin:0 0 12px;">Product · Visual Builder Canvas</p>
+    <p style="font-family:'Inter',sans-serif;font-size:15px;color:#888;margin:0 0 32px;">Drag-and-drop component builder with a rich library on the left, live canvas in the center, and a style properties panel on the right.</p>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.2);">
+      <div style="background:#1A1A1A;padding:10px 14px;display:flex;align-items:center;gap:6px;">
+        <div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></div>
+        <div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div>
+        <div style="flex:1;background:#0D0D0D;border-radius:4px;height:20px;display:flex;align-items:center;justify-content:center;margin:0 8px;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);">builder.brane.io/templates/acme-website</span></div>
+      </div>
+      <!-- Toolbar -->
+      <div style="background:#fff;border-bottom:1px solid #E8EAED;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;">
+        <div style="display:flex;align-items:center;gap:12px;"><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#111;">Template Builder</span><div style="width:1px;height:18px;background:#E8EAED;"></div><span style="font-family:'Inter',sans-serif;font-size:13px;color:#374151;">Acme Website</span></div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div style="display:flex;gap:1px;background:#F3F4F6;border-radius:4px;padding:3px;">
+            <button style="border:none;background:#fff;border-radius:3px;padding:5px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#374151;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,0.05);">Desktop</button>
+            <button style="border:none;background:none;padding:5px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;cursor:pointer;">Tablet</button>
+            <button style="border:none;background:none;padding:5px 10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;cursor:pointer;">Mobile</button>
+          </div>
+          <div style="border:1px solid #E8EAED;padding:6px 14px;border-radius:4px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;">Preview</div>
+          <div style="background:#A8FF3E;padding:6px 18px;border-radius:4px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#0D0D0D;">Publish</div>
+        </div>
+      </div>
+      <!-- Three panel -->
+      <div style="display:grid;grid-template-columns:220px 1fr 220px;height:500px;background:#F0EEE9;">
+        <!-- Left: Components -->
+        <div style="background:#fff;border-right:1px solid #E8EAED;padding:14px;overflow-y:auto;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 12px;">Components</p>
+          <div style="margin-bottom:14px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9CA3AF;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 6px;">Layout</p>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Header</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Hero Section</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>2-Column Grid</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Footer</div>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9CA3AF;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 6px;">Content</p>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Text Block</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Image</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Gallery</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Video Embed</div>
+            </div>
+          </div>
+          <div style="margin-bottom:14px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9CA3AF;letter-spacing:0.06em;text-transform:uppercase;margin:0 0 6px;">Interactive</p>
+            <div style="display:flex;flex-direction:column;gap:3px;">
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Form Controls</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Button Group</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Chatbot Widget</div>
+              <div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:grab;display:flex;align-items:center;gap:7px;"><span style="color:#9CA3AF;">⠿</span>Table</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Center: Canvas -->
+        <div style="padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:0;align-items:center;">
+          <!-- Selected component outline -->
+          <div style="width:100%;border:2px solid #6366F1;border-radius:6px;margin-bottom:4px;position:relative;">
+            <div style="position:absolute;top:-10px;left:12px;background:#6366F1;border-radius:3px;padding:1px 8px;font-family:'JetBrains Mono',monospace;font-size:9px;color:#fff;white-space:nowrap;">Header</div>
+            <div style="background:#0D0D0D;border-radius:4px;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;">
+              <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;color:#A8FF3E;">Acme Corp</div>
+              <div style="display:flex;gap:16px;"><span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.7);">About</span><span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.7);">Services</span><span style="font-family:'Inter',sans-serif;font-size:12px;color:rgba(255,255,255,0.7);">Contact</span><div style="background:#A8FF3E;padding:5px 14px;border-radius:3px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#0D0D0D;">Get Started</div></div>
+            </div>
+          </div>
+          <!-- Hero component -->
+          <div style="width:100%;background:linear-gradient(135deg,#6366F1,#8B5CF6);border-radius:6px;padding:40px 32px;margin-bottom:4px;text-align:center;">
+            <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-0.02em;">Enterprise Solutions, Simplified</div>
+            <div style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:20px;">Acme Corporation — building tomorrow's enterprise today</div>
+            <div style="display:flex;gap:10px;justify-content:center;"><div style="background:#fff;color:#6366F1;padding:10px 24px;border-radius:4px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;">Get Started</div><div style="border:1.5px solid rgba(255,255,255,0.4);color:#fff;padding:10px 24px;border-radius:4px;font-family:'Inter',sans-serif;font-size:13px;">Learn More</div></div>
+          </div>
+          <!-- Features grid -->
+          <div style="width:100%;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px;">
+            <div style="background:#fff;border-radius:6px;padding:18px;text-align:center;border:1px solid #E8EAED;"><div style="font-size:20px;margin-bottom:8px;">⚡</div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Fast Setup</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:#6B7280;">Deploy in hours, not months</div></div>
+            <div style="background:#fff;border-radius:6px;padding:18px;text-align:center;border:1px solid #E8EAED;"><div style="font-size:20px;margin-bottom:8px;">🔒</div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Secure</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:#6B7280;">Enterprise-grade security</div></div>
+            <div style="background:#fff;border-radius:6px;padding:18px;text-align:center;border:1px solid #E8EAED;"><div style="font-size:20px;margin-bottom:8px;">📊</div><div style="font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#111;margin-bottom:4px;">Analytics</div><div style="font-family:'Inter',sans-serif;font-size:11px;color:#6B7280;">Real-time insights</div></div>
+          </div>
+          <!-- Drop zone -->
+          <div style="width:100%;border:2px dashed #D1D5DB;border-radius:6px;padding:20px;text-align:center;background:rgba(255,255,255,0.5);">
+            <p style="font-family:'Inter',sans-serif;font-size:13px;color:#9CA3AF;margin:0;">+ Drop a component here</p>
+          </div>
+        </div>
+
+        <!-- Right: Properties -->
+        <div style="background:#fff;border-left:1px solid #E8EAED;padding:14px;overflow-y:auto;">
+          <div style="background:#EEF2FF;border-radius:6px;padding:8px 10px;margin-bottom:14px;border-left:3px solid #6366F1;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#4338CA;margin:0 0 3px;letter-spacing:0.06em;text-transform:uppercase;">Selected</p><p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#1F2937;margin:0;">Header Component</p></div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 10px;">Style</p>
+          <div style="margin-bottom:10px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0 0 4px;">Background</p><div style="display:flex;gap:6px;"><div style="width:24px;height:24px;background:#0D0D0D;border-radius:3px;border:1px solid #E8EAED;cursor:pointer;"></div><div style="flex:1;border:1px solid #E8EAED;border-radius:3px;padding:4px 8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#374151;">#0D0D0D</div></div></div>
+          <div style="margin-bottom:10px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0 0 4px;">Padding</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;"><div style="border:1px solid #E8EAED;border-radius:3px;padding:5px 7px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#374151;">16px</div><div style="border:1px solid #E8EAED;border-radius:3px;padding:5px 7px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10px;color:#374151;">24px</div></div></div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:14px 0 10px;">Typography</p>
+          <div style="margin-bottom:8px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0 0 4px;">Logo Font</p><div style="border:1px solid #E8EAED;border-radius:3px;padding:6px 8px;display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:12px;color:#374151;"><span>Syne</span><span>▾</span></div></div>
+          <div style="margin-bottom:8px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0 0 4px;">Nav Font Size</p><div style="border:1px solid #E8EAED;border-radius:3px;padding:6px 8px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;">12px</div></div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:14px 0 10px;">Responsive</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0;">Stack on mobile</p><div style="width:32px;height:18px;background:#A8FF3E;border-radius:9px;position:relative;"><div style="width:13px;height:13px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2.5px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0;">Sticky on scroll</p><div style="width:32px;height:18px;background:#A8FF3E;border-radius:9px;position:relative;"><div style="width:13px;height:13px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2.5px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SCREENSHOT 2: Invoice template output -->
+<section style="background:#0D0D0D;padding:80px 48px;display:none;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 12px;">Product · Invoice Template Output</p>
+    <p style="font-family:'Inter',sans-serif;font-size:15px;color:rgba(255,255,255,0.4);margin:0 0 32px;">The same builder creates professional invoice templates — complete with dynamic data fields and branded styling.</p>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.6);max-width:700px;margin:0 auto;">
+      <div style="background:#1A1A1A;padding:10px 14px;display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div><div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></div><div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div><div style="flex:1;background:#0D0D0D;border-radius:4px;height:20px;display:flex;align-items:center;justify-content:center;margin:0 8px;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);">builder.brane.io/invoice-preview</span></div></div>
+      <div style="background:#fff;padding:40px;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:36px;">
+          <div><div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#0D0D0D;margin-bottom:4px;">Acme Corp</div><div style="font-family:'Inter',sans-serif;font-size:12px;color:#6B7280;line-height:1.6;">123 Business Park, Hyderabad<br/>GSTIN: 36XXXXX1234Z</div></div>
+          <div style="text-align:right;"><div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#6366F1;margin-bottom:4px;">INVOICE</div><div style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#9CA3AF;">#INV-2024-0147</div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#9CA3AF;margin-top:4px;">Date: Oct 10, 2024</div><div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#EF4444;">Due: Oct 25, 2024</div></div>
+        </div>
+        <div style="background:#F8F9FA;border-radius:6px;padding:16px 20px;margin-bottom:24px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9CA3AF;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 6px;">Bill To</p><p style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#111;margin:0 0 4px;">TechFlow Solutions</p><p style="font-family:'Inter',sans-serif;font-size:13px;color:#6B7280;margin:0;line-height:1.5;">456 Tech Hub, Bangalore · billing@techflow.io</p></div>
+        <div style="border:1px solid #E8EAED;border-radius:6px;overflow:hidden;margin-bottom:24px;">
+          <table style="width:100%;border-collapse:collapse;">
+            <thead><tr style="background:#6366F1;"><th style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#fff;letter-spacing:0.06em;text-transform:uppercase;text-align:left;padding:10px 14px;">Description</th><th style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#fff;letter-spacing:0.06em;text-transform:uppercase;text-align:right;padding:10px 14px;">Qty</th><th style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#fff;letter-spacing:0.06em;text-transform:uppercase;text-align:right;padding:10px 14px;">Rate</th><th style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#fff;letter-spacing:0.06em;text-transform:uppercase;text-align:right;padding:10px 14px;">Amount</th></tr></thead>
+            <tbody>
+              <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:10px 14px;font-family:'Inter',sans-serif;font-size:13px;color:#374151;">Platform Subscription — Enterprise</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">1</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">₹50,000</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">₹50,000</td></tr>
+              <tr style="border-bottom:1px solid #F3F4F6;background:#FAFAFA;"><td style="padding:10px 14px;font-family:'Inter',sans-serif;font-size:13px;color:#374151;">Custom Integration Setup</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">3</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">₹15,000</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">₹45,000</td></tr>
+              <tr><td style="padding:10px 14px;font-family:'Inter',sans-serif;font-size:13px;color:#374151;">Implementation &amp; Training</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">1</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">₹20,000</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#374151;text-align:right;">₹20,000</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="display:flex;justify-content:flex-end;"><div style="width:260px;">
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #F3F4F6;"><span style="font-family:'Inter',sans-serif;font-size:13px;color:#6B7280;">Subtotal</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#374151;">₹1,15,000</span></div>
+          <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #F3F4F6;"><span style="font-family:'Inter',sans-serif;font-size:13px;color:#6B7280;">GST (18%)</span><span style="font-family:'JetBrains Mono',monospace;font-size:13px;color:#374151;">₹20,700</span></div>
+          <div style="display:flex;justify-content:space-between;padding:10px 0;background:#EEF2FF;margin:4px -4px 0;padding-left:4px;padding-right:4px;border-radius:4px;"><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#111;">Total</span><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#6366F1;">₹1,35,700</span></div>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL SCREENSHOTS -->
+<section style="background:#F7F5F0;padding:80px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0D0D0D;text-transform:uppercase;margin:0 0 12px;">Product · Live Template Builder</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;color:#888;margin:0 0 32px;">The actual Brane Template Builder — drag-and-drop invoice canvas with component library and style panel.</p>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.15);"><div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);margin-left:8px;">builder.brane.io — Invoice Template Canvas</span></div>
+      <img src="assets/screenshots/templatebuilder/templatebuilder-image1.png" style="width:100%;display:block;" alt="Brane Template Builder">
+    </div>
+  </div>
+</section>
+<section style="background:#0D0D0D;padding:80px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 12px;">Product · Component Picker</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(255,255,255,0.5);margin:0 0 32px;">Inserting components inline — headings, images, forms, tables — without writing a single line of code.</p>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.5);"><div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);margin-left:8px;">builder.brane.io — Add Component</span></div>
+      <img src="assets/screenshots/templatebuilder/templatebuilder-image3.png" style="width:100%;display:block;" alt="Brane Template Builder Component Picker">
+    </div>
+  </div>
+</section>
+
+<!-- DESIGN APPROACH -->
+<section style="background:#F7F5F0;padding:100px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0D0D0D;text-transform:uppercase;margin:0 0 16px;">Design Approach</p>
+    <h2 style="font-family:'Syne',sans-serif;font-size:clamp(32px,4vw,52px);font-weight:800;color:#0D0D0D;margin:0 0 60px;letter-spacing:-0.03em;">Markdown-first, visual-first, output-first</h2>
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0;border-top:1px solid #E8E4DC;align-items:start;">
+        <p style="font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:#E8E4DC;margin:0;line-height:1;letter-spacing:-0.04em;">01</p>
+        <div><h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#0D0D0D;margin:0 0 10px;letter-spacing:-0.01em;">Markdown-based content model</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#5A5A5A;line-height:1.75;margin:0;">Using markdown as the content foundation meant templates were portable, versionable, and could render to any output format — HTML, PDF, or email — from the same source. A key architectural decision that shaped the entire UX.</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0;border-top:1px solid #E8E4DC;align-items:start;">
+        <p style="font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:#E8E4DC;margin:0;line-height:1;letter-spacing:-0.04em;">02</p>
+        <div><h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#0D0D0D;margin:0 0 10px;letter-spacing:-0.01em;">Responsive-first component design</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#5A5A5A;line-height:1.75;margin:0;">Every component was designed mobile-first, with responsive behavior built in. Users could build once and have their templates adapt across devices without writing a single media query.</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:80px 1fr;gap:32px;padding:40px 0;border-top:1px solid #E8E4DC;border-bottom:1px solid #E8E4DC;align-items:start;">
+        <p style="font-family:'Syne',sans-serif;font-size:52px;font-weight:800;color:#E8E4DC;margin:0;line-height:1;letter-spacing:-0.04em;">03</p>
+        <div><h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#0D0D0D;margin:0 0 10px;letter-spacing:-0.01em;">Dual-mode: DIV and static page creation</h3><p style="font-family:'Inter',sans-serif;font-size:15px;color:#5A5A5A;line-height:1.75;margin:0;">The platform supported both a dynamic DIV-based approach for complex, data-driven layouts and a static page mode for simpler designs — giving users the right tool without forcing a choice upfront.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section style="background:#111;padding:48px;border-top:1px solid rgba(255,255,255,0.04);">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="CS-Notepad.dc.html" style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px;" style-hover="color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Previous: Notepad</a>
+    <a href="Portfolio.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:#A8FF3E;color:#0D0D0D;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:4px;">Back to Portfolio</a>
+  </div>
+</section>
+<footer style="background:#080808;padding:24px 48px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.04);"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.08em;text-transform:uppercase;">© 2026 Gangi Reddy Suuda</p><a href="Portfolio.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.08em;text-transform:uppercase;">Portfolio</a></footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const st = document.createElement('style');
+    st.textContent = '.js-reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease}.js-reveal.revealed{opacity:1;transform:none}';
+    document.head.appendChild(st);
+    this._px = [];
+    document.querySelectorAll('section').forEach((sec, si) => {
+      if (si === 0) return;
+      Array.from(sec.children).forEach((el, i) => {
+        el.dataset.delay = String(i * 0.08);
+        el.classList.add('js-reveal');
+      });
+    });
+    document.querySelectorAll('section img').forEach((el) => {
+      el.style.willChange = 'transform';
+      this._px.push(el);
+    });
+    this._t = false;
+    this._onScroll = () => {
+      if (!this._t) {
+        requestAnimationFrame(() => { this._tick(); this._t = false; });
+        this._t = true;
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._tick();
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const d = parseFloat(e.target.dataset.delay || '0');
+          setTimeout(() => e.target.classList.add('revealed'), d * 1000);
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.js-reveal').forEach((el) => this._io.observe(el));
+  }
+  _tick() {
+    const sy = window.scrollY;
+    this._px.forEach((el) => { el.style.transform = 'translateY(' + (-sy * 0.04) + 'px)'; });
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+  }
+}
+</script>
+</body>
+</html>

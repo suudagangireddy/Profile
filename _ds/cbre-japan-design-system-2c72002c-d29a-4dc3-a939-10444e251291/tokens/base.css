@@ -1,0 +1,57 @@
+/* ============================================================
+   CBRE Japan — Base element styling & helper utilities.
+   Lightweight resets + brand defaults. Components rely on
+   the tokens; these set sensible document-level defaults.
+   ============================================================ */
+
+.cbre-root,
+body.cbre {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display / headings use Financier */
+.cbre-display,
+.cbre-h1, .cbre-h2, .cbre-h3 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  letter-spacing: var(--ls-heading);
+  line-height: var(--lh-heading);
+  margin: 0;
+  text-wrap: balance;
+}
+.cbre-display {
+  font-size: var(--fs-display-lg);
+  font-weight: var(--fw-regular);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-display);
+}
+.cbre-h1 { font-size: var(--fs-h1); font-weight: var(--fw-medium); }
+.cbre-h2 { font-size: var(--fs-h2); font-weight: var(--fw-medium); }
+.cbre-h3 { font-size: var(--fs-h3); font-weight: var(--fw-medium); }
+
+/* Mono eyebrow — a signature CBRE label treatment */
+.cbre-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-eyebrow);
+  font-weight: var(--fw-regular);
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.cbre-body { font-family: var(--font-body); font-size: var(--fs-body); line-height: var(--lh-body); }
+.cbre-muted { color: var(--text-muted); }
+
+/* Accessible focus ring */
+.cbre-focusable:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+::selection { background: var(--cbre-accent-green); color: var(--cbre-dark-green); }

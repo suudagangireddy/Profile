@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<div id="cs-pw-gate" style="position:fixed;inset:0;z-index:9999;background:#0D0D0D;display:flex;align-items:center;justify-content:center;padding:24px;font-family:'Outfit',sans-serif;">
+  <div style="width:100%;max-width:380px;">
+    <div style="width:40px;height:40px;background:#A8FF3E;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#0D0D0D;">GR</span>
+    </div>
+    <h2 style="font-size:24px;font-weight:800;color:#fff;margin:0 0 8px;letter-spacing:-0.02em;">Protected case study</h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.4);margin:0 0 28px;">Enter the access password to view this project.</p>
+    <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:8px;">Password</label>
+    <input id="cs-pw-inp" type="password" placeholder="••••••••••" style="width:100%;font-family:'Outfit',sans-serif;font-size:15px;color:#fff;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:13px 16px;outline:none;box-sizing:border-box;margin-bottom:8px;transition:border-color 0.15s;">
+    <p id="cs-pw-err" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#FF6B6B;letter-spacing:0.06em;margin:0 0 10px;text-transform:uppercase;display:none;">Incorrect password — try again</p>
+    <button id="cs-pw-btn" style="width:100%;background:#A8FF3E;color:#0D0D0D;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:8px;border:none;cursor:pointer;">Enter project →</button>
+  </div>
+</div>
+
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>*, *::before, *::after { box-sizing: border-box; } html, body { margin: 0; padding: 0; background: #0D0D0D; } a { text-decoration: none; color: inherit; }
+    @media (max-width:768px) {
+      section { padding-left:20px !important; padding-right:20px !important; }
+      nav { padding:0 20px !important; }
+      .cs-stats, .cs-2col, .cs-3col, .cs-4col, .cs-img2col { grid-template-columns:1fr !important; gap:0 !important; }
+      .cs-stats > div { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.08) !important; }
+      .cs-img2col { gap:16px !important; }
+      .cs-dd-grid { grid-template-columns:1fr !important; }
+      .cs-dd-grid > div { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.08) !important; padding:28px 0 !important; }
+      .cs-mock { display:none !important; }
+      .cs-nav-footer { flex-direction:column !important; gap:16px !important; }
+    }
+    </style>
+  <script>
+(function(){
+  function initGate(){
+    var gate=document.getElementById('cs-pw-gate');
+    if(!gate)return;
+    if(sessionStorage.getItem('pf_ok')==='1'){gate.remove();return;}
+    var inp=document.getElementById('cs-pw-inp');
+    var err=document.getElementById('cs-pw-err');
+    var btn=document.getElementById('cs-pw-btn');
+    function tryPw(){
+      if(inp.value==='Access@1'){
+        sessionStorage.setItem('pf_ok','1');
+        gate.style.opacity='0';gate.style.transition='opacity 0.3s';
+        setTimeout(function(){gate.remove();},300);
+      } else {
+        err.style.display='block';
+        inp.style.borderColor='#FF6B6B';
+        setTimeout(function(){inp.style.borderColor='rgba(255,255,255,0.12)';},1000);
+      }
+    }
+    btn.addEventListener('click',tryPw);
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryPw();});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initGate);}
+  else{setTimeout(initGate,100);}
+})();
+  </script>
+</helmet>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;align-items:center;padding:0 44px;justify-content:space-between;background:#0D0D0D;border-bottom:1px solid rgba(255,255,255,0.07);">
+  <a href="Portfolio.dc.html" style="display:flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Work</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:0.12em;text-transform:uppercase;">Case Study</span>
+    <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.25);letter-spacing:-0.01em;">03</span>
+  </div>
+  <a href="Profile.dc.html" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Profile</a>
+</nav>
+
+<section style="background:#0D0D0D;padding:120px 48px 80px;position:relative;overflow:hidden;">
+  <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#A8FF3E;"></div>
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 24px;">Brane Enterprises · 2019–2024 · Lead Designer</p>
+    <h1 style="font-family:'Syne',sans-serif;font-size:clamp(48px,7vw,88px);font-weight:800;color:#fff;line-height:0.95;letter-spacing:-0.03em;margin:0 0 28px;">Notepad — Collaborative Workspace</h1>
+    <p style="font-family:'Inter',sans-serif;font-size:18px;color:rgba(255,255,255,0.55);line-height:1.65;max-width:620px;margin:0 0 52px;">Internal documentation and project management platform that replaced fragmented tools — saving $25K per month across a 38-member team.</p>
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px;">Domain</p><p style="font-family:'Inter',sans-serif;font-size:15px;color:#fff;margin:0;">Collaboration · Knowledge Management</p></div>
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px;">Users</p><p style="font-family:'Inter',sans-serif;font-size:15px;color:#fff;margin:0;">38-member cross-functional team</p></div>
+    </div>
+  </div>
+</section>
+
+<section style="background:#111;border-top:1px solid rgba(255,255,255,0.04);padding:48px;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;" class="cs-stats" style="border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden;">
+    <div style="padding:32px 40px;border-right:1px solid rgba(255,255,255,0.06);"><p style="font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">$25<span style="color:#A8FF3E;font-size:32px;">K/mo</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Monthly savings</p></div>
+    <div style="padding:32px 40px;border-right:1px solid rgba(255,255,255,0.06);"><p style="font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">38<span style="color:#A8FF3E;font-size:40px;"> team</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Members served</p></div>
+    <div style="padding:32px 40px;"><p style="font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">4<span style="color:#A8FF3E;font-size:40px;"> roles</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">User types designed for</p></div>
+  </div>
+</section>
+
+<!-- THE PROBLEM -->
+<section style="background:#F7F5F0;padding:100px 48px;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;" class="cs-2col" style="unused:0;">
+    <div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0D0D0D;text-transform:uppercase;margin:0 0 16px;">The Problem</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(28px,3vw,40px);font-weight:800;color:#0D0D0D;margin:0 0 24px;line-height:1.1;letter-spacing:-0.02em;">A 38-member team drowning in fragmented tools, lost knowledge, and missed sprints.</h2>
+      <p style="font-family:'Outfit',sans-serif;font-size:16px;color:#5A5A5A;line-height:1.75;margin:0 0 20px;">Developers, PMs, designers, and content writers all used different tools — Notion, Confluence, Jira, Slack threads — with no single source of truth. Knowledge was siloed, sprints were untracked.</p>
+      <p style="font-family:'Outfit',sans-serif;font-size:16px;color:#5A5A5A;line-height:1.75;margin:0;">We needed one platform that served as documentation hub, project tracker, sprint planner, and knowledge base — all in a single coherent experience.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;">
+      <div style="background:#fff;border:1px solid #E8E4DC;border-radius:8px;padding:24px;">
+        <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 14px;">Users &amp; their problems</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+          <div style="background:#F7F5F0;border-radius:5px;padding:14px;"><p style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#0D0D0D;margin:0 0 4px;">Developers</p><p style="font-family:'Outfit',sans-serif;font-size:12px;color:#888;margin:0;">Sprint tracking across 3 tools</p></div>
+          <div style="background:#F7F5F0;border-radius:5px;padding:14px;"><p style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#0D0D0D;margin:0 0 4px;">Product Managers</p><p style="font-family:'Outfit',sans-serif;font-size:12px;color:#888;margin:0;">PRDs lost in email threads</p></div>
+          <div style="background:#F7F5F0;border-radius:5px;padding:14px;"><p style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#0D0D0D;margin:0 0 4px;">Designers</p><p style="font-family:'Outfit',sans-serif;font-size:12px;color:#888;margin:0;">No shared design decisions log</p></div>
+          <div style="background:#F7F5F0;border-radius:5px;padding:14px;"><p style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:#0D0D0D;margin:0 0 4px;">Content Writers</p><p style="font-family:'Outfit',sans-serif;font-size:12px;color:#888;margin:0;">Docs duplicated across drives</p></div>
+        </div>
+      </div>
+      <div style="background:#0D0D0D;border-radius:8px;padding:24px;"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#A8FF3E;letter-spacing:0.08em;text-transform:uppercase;margin:0 0 10px;">Cost before Notepad</p><p style="font-family:'Outfit',sans-serif;font-size:24px;font-weight:800;color:#fff;margin:0;">$25,000 <span style="font-size:14px;color:rgba(255,255,255,0.5);font-weight:400;">per month in fragmented SaaS tools</span></p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SCREENSHOT: Rich Document Editor -->
+<section style="background:#F7F5F0;padding:80px 48px;display:none;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0D0D0D;text-transform:uppercase;margin:0 0 12px;">Product · Document Editor</p>
+    <p style="font-family:'Inter',sans-serif;font-size:15px;color:#888;margin:0 0 32px;">Rich multi-control editor with real-time collaboration, version history, AI assist, @mentions and nested page hierarchy.</p>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.2);">
+      <div style="background:#1A1A1A;padding:10px 14px;display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div><div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></div><div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div><div style="flex:1;background:#0D0D0D;border-radius:4px;height:20px;display:flex;align-items:center;justify-content:center;margin:0 8px;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);">notepad.brane.io/workspace/product-prd</span></div></div>
+      <div style="background:#fff;">
+        <!-- App header -->
+        <div style="background:#fff;border-bottom:1px solid #E8EAED;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;align-items:center;gap:12px;"><span style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#111;">Notepad</span><div style="width:1px;height:18px;background:#E8EAED;"></div><span style="font-family:'Inter',sans-serif;font-size:13px;color:#374151;">Product / PRD v2.0</span></div>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="display:flex;align-items:center;"><div style="width:26px;height:26px;border-radius:50%;background:#6366F1;border:2px solid #fff;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:#fff;">GR</div><div style="width:26px;height:26px;border-radius:50%;background:#10B981;border:2px solid #fff;margin-left:-8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:#fff;">RK</div><div style="width:26px;height:26px;border-radius:50%;background:#F59E0B;border:2px solid #fff;margin-left:-8px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:10px;font-weight:700;color:#fff;">PS</div></div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#10B981;background:#ECFDF5;padding:3px 8px;border-radius:4px;">● 3 editing</span>
+            <div style="border:1px solid #E8EAED;padding:6px 12px;border-radius:4px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;">Share</div>
+          </div>
+        </div>
+        <!-- Formatting toolbar -->
+        <div style="background:#FAFAFA;border-bottom:1px solid #E8EAED;padding:8px 16px;display:flex;align-items:center;gap:16px;">
+          <div style="display:flex;gap:4px;"><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#111;cursor:pointer;background:#EEF2FF;color:#4338CA;">B</button><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-family:'Inter',sans-serif;font-size:13px;font-style:italic;color:#374151;cursor:pointer;">I</button><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-family:'Inter',sans-serif;font-size:13px;text-decoration:underline;color:#374151;cursor:pointer;">U</button></div>
+          <div style="width:1px;height:18px;background:#E8EAED;"></div>
+          <div style="display:flex;gap:4px;"><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:#374151;cursor:pointer;">H1</button><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-family:'Syne',sans-serif;font-size:11px;font-weight:700;color:#9CA3AF;cursor:pointer;">H2</button><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-family:'Syne',sans-serif;font-size:9px;font-weight:700;color:#9CA3AF;cursor:pointer;">H3</button></div>
+          <div style="width:1px;height:18px;background:#E8EAED;"></div>
+          <div style="display:flex;gap:4px;"><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-size:12px;color:#374151;cursor:pointer;">≡</button><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-size:12px;color:#374151;cursor:pointer;">⋮</button><button style="border:none;background:none;padding:4px 8px;border-radius:3px;font-size:12px;color:#374151;cursor:pointer;">🔗</button></div>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:8px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Auto-saved · 2 min ago</span><div style="border:1px solid #E8EAED;padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#374151;cursor:pointer;">⊙ History</div></div>
+        </div>
+        <!-- Content area -->
+        <div style="display:grid;grid-template-columns:220px 1fr 240px;height:440px;">
+          <!-- Left sidebar -->
+          <div style="background:#FAFAFA;border-right:1px solid #E8EAED;padding:14px;overflow-y:auto;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 10px;">Workspace</p>
+            <div style="margin-bottom:6px;">
+              <div style="display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:4px;cursor:pointer;"><span style="color:#9CA3AF;font-size:10px;">▶</span><span style="font-size:11px;">📁</span><span style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#374151;">Product</span></div>
+              <div style="margin-left:16px;">
+                <div style="display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:4px;background:#EEF2FF;cursor:pointer;"><span style="color:#6366F1;font-size:10px;">▼</span><span style="font-size:11px;">📄</span><span style="font-family:'Inter',sans-serif;font-size:12px;color:#4338CA;font-weight:500;">PRD v2.0</span></div>
+                <div style="display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:4px;cursor:pointer;margin-top:2px;"><span style="color:#9CA3AF;font-size:10px;">  </span><span style="font-size:11px;">📄</span><span style="font-family:'Inter',sans-serif;font-size:12px;color:#6B7280;">Sprint 14</span></div>
+                <div style="display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:4px;cursor:pointer;margin-top:2px;"><span style="color:#9CA3AF;font-size:10px;">  </span><span style="font-size:11px;">📄</span><span style="font-family:'Inter',sans-serif;font-size:12px;color:#6B7280;">Roadmap Q1</span></div>
+              </div>
+            </div>
+            <div style="margin-bottom:6px;">
+              <div style="display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:4px;cursor:pointer;"><span style="color:#9CA3AF;font-size:10px;">▶</span><span style="font-size:11px;">📁</span><span style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#374151;">Design</span></div>
+            </div>
+            <div style="margin-bottom:6px;">
+              <div style="display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:4px;cursor:pointer;"><span style="color:#9CA3AF;font-size:10px;">▶</span><span style="font-size:11px;">📁</span><span style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#374151;">Research</span></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;padding:5px 6px;border-radius:4px;cursor:pointer;border:1px dashed #E8EAED;margin-top:12px;justify-content:center;"><span style="font-family:'Inter',sans-serif;font-size:12px;color:#9CA3AF;">+ New page</span></div>
+          </div>
+          <!-- Editor main -->
+          <div style="padding:32px 40px;overflow-y:auto;">
+            <h1 style="font-family:'Syne',sans-serif;font-size:32px;font-weight:800;color:#111;margin:0 0 24px;letter-spacing:-0.02em;">Product Requirements Document</h1>
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid #E8EAED;">
+              <div style="display:flex;align-items:center;gap:6px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Last edited by</span><div style="width:18px;height:18px;border-radius:50%;background:#6366F1;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:8px;font-weight:700;color:#fff;">GR</div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#374151;">Gangi Reddy</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">· 2 min ago</span></div>
+            </div>
+            <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#111;margin:0 0 12px;letter-spacing:-0.01em;">Overview</h2>
+            <p style="font-family:'Inter',sans-serif;font-size:15px;color:#374151;line-height:1.75;margin:0 0 20px;">This document outlines the requirements for the <strong style="color:#111;">Q1 2024 platform release</strong>, covering AI-assisted onboarding, the dynamic field generation system, and runtime customization improvements.</p>
+            <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#111;margin:0 0 12px;letter-spacing:-0.01em;">Goals</h2>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:20px;">
+              <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:6px;height:6px;border-radius:50%;background:#A8FF3E;margin-top:9px;flex-shrink:0;"></div><p style="font-family:'Inter',sans-serif;font-size:15px;color:#374151;margin:0;line-height:1.6;">Reduce time-to-first-app by 40% with guided onboarding</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:6px;height:6px;border-radius:50%;background:#A8FF3E;margin-top:9px;flex-shrink:0;"></div><p style="font-family:'Inter',sans-serif;font-size:15px;color:#374151;margin:0;line-height:1.6;">Improve NPS from 62 to 72+ through reduced friction</p></div>
+              <div style="display:flex;gap:10px;align-items:flex-start;"><div style="width:6px;height:6px;border-radius:50%;background:#A8FF3E;margin-top:9px;flex-shrink:0;"></div><p style="font-family:'Inter',sans-serif;font-size:15px;color:#374151;margin:0;line-height:1.6;">Enable 200+ third-party integrations via connector API</p></div>
+            </div>
+            <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#111;margin:0 0 12px;letter-spacing:-0.01em;">Success Metrics</h2>
+            <div style="background:#F8F9FA;border:1px solid #E8EAED;border-radius:6px;overflow:hidden;">
+              <table style="width:100%;border-collapse:collapse;">
+                <thead><tr style="background:#F3F4F6;"><th style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#6B7280;letter-spacing:0.06em;text-transform:uppercase;text-align:left;padding:10px 14px;border-bottom:1px solid #E8EAED;">Metric</th><th style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#6B7280;letter-spacing:0.06em;text-transform:uppercase;text-align:left;padding:10px 14px;border-bottom:1px solid #E8EAED;">Current</th><th style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#6B7280;letter-spacing:0.06em;text-transform:uppercase;text-align:left;padding:10px 14px;border-bottom:1px solid #E8EAED;">Target</th></tr></thead>
+                <tbody>
+                  <tr style="border-bottom:1px solid #F3F4F6;"><td style="padding:10px 14px;font-family:'Inter',sans-serif;font-size:13px;color:#374151;">Time to first app</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#EF4444;">48 min</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#10B981;font-weight:500;">28 min</td></tr>
+                  <tr><td style="padding:10px 14px;font-family:'Inter',sans-serif;font-size:13px;color:#374151;">NPS Score</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#EF4444;">62</td><td style="padding:10px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#10B981;font-weight:500;">72+</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!-- Right: Comments & AI -->
+          <div style="background:#FAFAFA;border-left:1px solid #E8EAED;padding:14px;overflow-y:auto;">
+            <div style="display:flex;gap:4px;margin-bottom:14px;"><button style="flex:1;border:none;background:#EEF2FF;border-radius:4px;padding:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#4338CA;cursor:pointer;">Comments</button><button style="flex:1;border:none;background:none;border-radius:4px;padding:6px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;cursor:pointer;">AI Assist</button></div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <div style="background:#fff;border:1px solid #E8EAED;border-radius:6px;padding:10px;border-left:3px solid #6366F1;">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><div style="width:18px;height:18px;border-radius:50%;background:#10B981;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:8px;font-weight:700;color:#fff;">RK</div><span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#374151;">Ravi Kumar</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9CA3AF;margin-left:auto;">5m</span></div>
+                <p style="font-family:'Inter',sans-serif;font-size:12px;color:#374151;margin:0;line-height:1.4;">Should we include mobile-specific onboarding or keep it web-only for v1?</p>
+                <div style="display:flex;gap:6px;margin-top:8px;"><div style="background:#F3F4F6;padding:4px 8px;border-radius:4px;font-family:'Inter',sans-serif;font-size:11px;color:#374151;cursor:pointer;">Reply</div><div style="background:#EEF2FF;padding:4px 8px;border-radius:4px;font-family:'Inter',sans-serif;font-size:11px;color:#4338CA;cursor:pointer;">Resolve</div></div>
+              </div>
+              <div style="background:#fff;border:1px solid #E8EAED;border-radius:6px;padding:10px;border-left:3px solid #F59E0B;">
+                <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;"><div style="width:18px;height:18px;border-radius:50%;background:#F59E0B;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-size:8px;font-weight:700;color:#fff;">PS</div><span style="font-family:'Inter',sans-serif;font-size:11px;font-weight:600;color:#374151;">Priya Shah</span><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#9CA3AF;margin-left:auto;">1h</span></div>
+                <p style="font-family:'Inter',sans-serif;font-size:12px;color:#374151;margin:0;line-height:1.4;">The NPS target of 72 might be aggressive given current baseline. Consider 68 as intermediate goal.</p>
+                <div style="display:flex;gap:6px;margin-top:8px;"><div style="background:#F3F4F6;padding:4px 8px;border-radius:4px;font-family:'Inter',sans-serif;font-size:11px;color:#374151;cursor:pointer;">Reply</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SPRINT VIEW -->
+<section style="background:#0D0D0D;padding:80px 48px;display:none;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 12px;">Product · Sprint Planning View</p>
+    <p style="font-family:'Inter',sans-serif;font-size:15px;color:rgba(255,255,255,0.4);margin:0 0 32px;">Kanban-style sprint board integrated directly into the knowledge base — no separate tool needed.</p>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.5);">
+      <div style="background:#1A1A1A;padding:10px 14px;display:flex;align-items:center;gap:6px;"><div style="width:10px;height:10px;border-radius:50%;background:#FF5F57;"></div><div style="width:10px;height:10px;border-radius:50%;background:#FEBC2E;"></div><div style="width:10px;height:10px;border-radius:50%;background:#28C840;"></div><div style="flex:1;background:#0D0D0D;border-radius:4px;height:20px;display:flex;align-items:center;justify-content:center;margin:0 8px;"><span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);">notepad.brane.io/workspace/sprint-14</span></div></div>
+      <div style="background:#fff;padding:20px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;"><div><h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#111;margin:0 0 2px;">Sprint 14</h3><p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;margin:0;">Oct 7 – Oct 21, 2024 · 14 tasks</p></div><div style="display:flex;gap:8px;"><div style="border:1px solid #E8EAED;padding:6px 14px;border-radius:4px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;">+ Add task</div><div style="background:#A8FF3E;padding:6px 14px;border-radius:4px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#0D0D0D;">Start Sprint</div></div></div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;">
+          <div style="background:#F8F9FA;border-radius:8px;padding:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#6B7280;letter-spacing:0.08em;text-transform:uppercase;margin:0;">Backlog</p><span style="background:#E5E7EB;color:#374151;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:8px;">5</span></div>
+            <div style="background:#fff;border:1px solid #E8EAED;border-radius:5px;padding:10px;margin-bottom:8px;"><p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#111;margin:0 0 6px;line-height:1.4;">User research for mobile onboarding</p><div style="display:flex;align-items:center;gap:6px;"><span style="background:#EEF2FF;color:#4338CA;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;">Research</span><div style="width:16px;height:16px;border-radius:50%;background:#6366F1;margin-left:auto;font-family:'Syne',sans-serif;font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;">GR</div></div></div>
+            <div style="background:#fff;border:1px solid #E8EAED;border-radius:5px;padding:10px;"><p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#111;margin:0 0 6px;line-height:1.4;">API rate limiting implementation</p><div style="display:flex;align-items:center;gap:6px;"><span style="background:#FFF7ED;color:#9A3412;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;">Dev</span><div style="width:16px;height:16px;border-radius:50%;background:#10B981;margin-left:auto;font-family:'Syne',sans-serif;font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;">RK</div></div></div>
+          </div>
+          <div style="background:#F8F9FA;border-radius:8px;padding:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#6B7280;letter-spacing:0.08em;text-transform:uppercase;margin:0;">In Progress</p><span style="background:#FEF3C7;color:#92400E;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:8px;">4</span></div>
+            <div style="background:#fff;border:1px solid #FDE68A;border-radius:5px;padding:10px;margin-bottom:8px;"><p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#111;margin:0 0 6px;line-height:1.4;">Design system token update for dark mode</p><div style="display:flex;align-items:center;gap:6px;"><span style="background:#EEF2FF;color:#4338CA;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;">Design</span><div style="width:16px;height:16px;border-radius:50%;background:#6366F1;margin-left:auto;font-family:'Syne',sans-serif;font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;">GR</div></div></div>
+            <div style="background:#fff;border:1px solid #FDE68A;border-radius:5px;padding:10px;"><p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#111;margin:0 0 6px;line-height:1.4;">Sprint review presentation prep</p><div style="display:flex;align-items:center;gap:6px;"><span style="background:#F3E8FF;color:#7C3AED;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;">PM</span><div style="width:16px;height:16px;border-radius:50%;background:#F59E0B;margin-left:auto;font-family:'Syne',sans-serif;font-size:8px;font-weight:700;color:#fff;display:flex;align-items:center;justify-content:center;">PS</div></div></div>
+          </div>
+          <div style="background:#F8F9FA;border-radius:8px;padding:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#6B7280;letter-spacing:0.08em;text-transform:uppercase;margin:0;">Review</p><span style="background:#DBEAFE;color:#1E40AF;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:8px;">3</span></div>
+            <div style="background:#fff;border:1px solid #BFDBFE;border-radius:5px;padding:10px;"><p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#111;margin:0 0 6px;line-height:1.4;">No-code builder NL input improvements</p><div style="display:flex;align-items:center;gap:6px;"><span style="background:#EEF2FF;color:#4338CA;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;">Design</span></div></div>
+          </div>
+          <div style="background:#F8F9FA;border-radius:8px;padding:14px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#6B7280;letter-spacing:0.08em;text-transform:uppercase;margin:0;">Done</p><span style="background:#ECFDF5;color:#065F46;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 7px;border-radius:8px;">8</span></div>
+            <div style="background:#fff;border:1px solid #A7F3D0;border-radius:5px;padding:10px;margin-bottom:8px;"><p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#9CA3AF;margin:0 0 4px;line-height:1.4;text-decoration:line-through;">Table view performance fix</p><span style="background:#ECFDF5;color:#065F46;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;">✓ Done</span></div>
+            <div style="background:#fff;border:1px solid #A7F3D0;border-radius:5px;padding:10px;"><p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:500;color:#9CA3AF;margin:0 0 4px;line-height:1.4;text-decoration:line-through;">WhatsApp integration connector</p><span style="background:#ECFDF5;color:#065F46;font-family:'JetBrains Mono',monospace;font-size:9px;padding:2px 6px;border-radius:3px;">✓ Done</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL SCREENSHOTS -->
+<section style="background:#F7F5F0;padding:80px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#0D0D0D;text-transform:uppercase;margin:0 0 12px;">Product · Rich Text Editor</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;color:#888;margin:0 0 32px;">The live Notepad editor — inline formatting toolbar, rich text, tables, and AI assist used daily by the 38-member team.</p>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.15);"><div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);margin-left:8px;">notepad.brane.io — Rich Text Editor</span></div>
+      <img src="assets/screenshots/notepad/notepad-image2.png" style="width:100%;display:block;" alt="Notepad Rich Text Editor">
+    </div>
+  </div>
+</section>
+<section style="background:#0D0D0D;padding:80px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 12px;">Product · Table Documents &amp; File Home</p>
+    <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(255,255,255,0.5);margin:0 0 32px;">Structured data tables inside documents, and the Notepad home showing all published and draft files.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="cs-img2col" style="unused:0;">
+      <div style="border-radius:10px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.5);"><div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);margin-left:8px;">Notepad — Table Document</span></div>
+        <img src="assets/screenshots/notepad/notepad-image3.png" style="width:100%;display:block;" alt="Notepad Table">
+      </div>
+      <div style="border-radius:10px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.5);"><div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);margin-left:8px;">Notepad — Files Home</span></div>
+        <img src="assets/screenshots/notepad/notepad-image7.png" style="width:100%;display:block;" alt="Notepad Home">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT -->
+<section style="background:#111;padding:48px;border-top:1px solid rgba(255,255,255,0.04);">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;">
+    <a href="CS-Stringer.dc.html" style="font-family:'Inter',sans-serif;font-size:14px;color:rgba(255,255,255,0.4);display:flex;align-items:center;gap:8px;" style-hover="color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>Previous: Stringer</a>
+    <a href="CS-TemplateBuilder.dc.html" style="display:inline-flex;align-items:center;gap:10px;background:#A8FF3E;color:#0D0D0D;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:4px;">Next: Template Builder <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></a>
+  </div>
+</section>
+<footer style="background:#080808;padding:24px 48px;display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.04);"><p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.08em;text-transform:uppercase;">© 2026 Gangi Reddy Suuda</p><a href="Portfolio.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.08em;text-transform:uppercase;">Portfolio</a></footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount() {
+    const st = document.createElement('style');
+    st.textContent = '.js-reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease}.js-reveal.revealed{opacity:1;transform:none}';
+    document.head.appendChild(st);
+    this._px = [];
+    document.querySelectorAll('section').forEach((sec, si) => {
+      if (si === 0) return;
+      Array.from(sec.children).forEach((el, i) => {
+        el.dataset.delay = String(i * 0.08);
+        el.classList.add('js-reveal');
+      });
+    });
+    document.querySelectorAll('section img').forEach((el) => {
+      el.style.willChange = 'transform';
+      this._px.push(el);
+    });
+    this._t = false;
+    this._onScroll = () => {
+      if (!this._t) {
+        requestAnimationFrame(() => { this._tick(); this._t = false; });
+        this._t = true;
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._tick();
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const d = parseFloat(e.target.dataset.delay || '0');
+          setTimeout(() => e.target.classList.add('revealed'), d * 1000);
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.js-reveal').forEach((el) => this._io.observe(el));
+  }
+  _tick() {
+    const sy = window.scrollY;
+    this._px.forEach((el) => { el.style.transform = 'translateY(' + (-sy * 0.04) + 'px)'; });
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+  }
+}
+</script>
+</body>
+</html>

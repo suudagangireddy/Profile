@@ -1,0 +1,125 @@
+/* ============================================================
+   CBRE Japan — Webfonts
+   Financier Display (serif display), Calibre (sans / UI),
+   Space Mono (mono / data), Noto Sans CJK JP (Japanese).
+   ============================================================ */
+
+/* ---------- Financier Display (serif, display + editorial) ---------- */
+@font-face {
+  font-family: "Financier Display";
+  src: url("../assets/fonts/FinancierDisplay-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Financier Display";
+  src: url("../assets/fonts/FinancierDisplay-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Financier Display";
+  src: url("../assets/fonts/FinancierDisplay-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Financier Display";
+  src: url("../assets/fonts/FinancierDisplay-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Calibre (sans, UI + body) ---------- */
+@font-face {
+  font-family: "Calibre";
+  src: url("../assets/fonts/Calibre-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Calibre";
+  src: url("../assets/fonts/Calibre-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Calibre";
+  src: url("../assets/fonts/Calibre-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Calibre";
+  src: url("../assets/fonts/Calibre-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Calibre";
+  src: url("../assets/fonts/Calibre-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Calibre";
+  src: url("../assets/fonts/Calibre-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Space Mono (mono, data + tabular labels) ---------- */
+@font-face {
+  font-family: "Space Mono";
+  src: url("../assets/fonts/SpaceMono-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Space Mono";
+  src: url("../assets/fonts/SpaceMono-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------- Noto Sans CJK JP (Japanese text) ---------- */
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("../assets/fonts/NotoSansCJKjp-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("../assets/fonts/NotoSansCJKjp-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("../assets/fonts/NotoSansCJKjp-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans JP";
+  src: url("../assets/fonts/NotoSansCJKjp-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

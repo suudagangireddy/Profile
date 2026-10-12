@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<div id="cs-pw-gate" style="position:fixed;inset:0;z-index:9999;background:#0D0D0D;display:flex;align-items:center;justify-content:center;padding:24px;font-family:'Outfit',sans-serif;">
+  <div style="width:100%;max-width:380px;">
+    <div style="width:40px;height:40px;background:#A8FF3E;border-radius:9px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+      <span style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:800;color:#0D0D0D;">GR</span>
+    </div>
+    <h2 style="font-size:24px;font-weight:800;color:#fff;margin:0 0 8px;letter-spacing:-0.02em;">Protected case study</h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.4);margin:0 0 28px;">Enter the access password to view this project.</p>
+    <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:8px;">Password</label>
+    <input id="cs-pw-inp" type="password" placeholder="••••••••••" style="width:100%;font-family:'Outfit',sans-serif;font-size:15px;color:#fff;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.12);border-radius:8px;padding:13px 16px;outline:none;box-sizing:border-box;margin-bottom:8px;transition:border-color 0.15s;">
+    <p id="cs-pw-err" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#FF6B6B;letter-spacing:0.06em;margin:0 0 10px;text-transform:uppercase;display:none;">Incorrect password — try again</p>
+    <button id="cs-pw-btn" style="width:100%;background:#A8FF3E;color:#0D0D0D;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:8px;border:none;cursor:pointer;">Enter project →</button>
+  </div>
+</div>
+
+<x-dc>
+
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>*, *::before, *::after { box-sizing: border-box; } html, body { margin: 0; padding: 0; background: #0D0D0D; } a { text-decoration: none; color: inherit; }
+    @media (max-width:768px) {
+      section { padding-left:20px !important; padding-right:20px !important; }
+      nav { padding:0 20px !important; }
+      .cs-stats, .cs-2col, .cs-3col, .cs-4col, .cs-img2col { grid-template-columns:1fr !important; gap:0 !important; }
+      .cs-stats > div { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.08) !important; }
+      .cs-img2col { gap:16px !important; }
+      .cs-dd-grid { grid-template-columns:1fr !important; }
+      .cs-dd-grid > div { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.08) !important; padding:28px 0 !important; }
+      .cs-mock { display:none !important; }
+      .cs-nav-footer { flex-direction:column !important; gap:16px !important; }
+    }
+    </style>
+  <script>
+(function(){
+  function initGate(){
+    var gate=document.getElementById('cs-pw-gate');
+    if(!gate)return;
+    if(sessionStorage.getItem('pf_ok')==='1'){gate.remove();return;}
+    var inp=document.getElementById('cs-pw-inp');
+    var err=document.getElementById('cs-pw-err');
+    var btn=document.getElementById('cs-pw-btn');
+    function tryPw(){
+      if(inp.value==='Access@1'){
+        sessionStorage.setItem('pf_ok','1');
+        gate.style.opacity='0';gate.style.transition='opacity 0.3s';
+        setTimeout(function(){gate.remove();},300);
+      } else {
+        err.style.display='block';
+        inp.style.borderColor='#FF6B6B';
+        setTimeout(function(){inp.style.borderColor='rgba(255,255,255,0.12)';},1000);
+      }
+    }
+    btn.addEventListener('click',tryPw);
+    inp.addEventListener('keydown',function(e){if(e.key==='Enter')tryPw();});
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initGate);}
+  else{setTimeout(initGate,100);}
+})();
+  </script>
+</helmet>
+
+<nav style="position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;align-items:center;padding:0 44px;justify-content:space-between;background:#0D0D0D;border-bottom:1px solid rgba(255,255,255,0.07);">
+  <a href="Portfolio.dc.html" style="display:flex;align-items:center;gap:8px;font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'"><svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="flex-shrink:0;"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Work</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.2);letter-spacing:0.12em;text-transform:uppercase;">Case Study</span>
+    <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.25);letter-spacing:-0.01em;">01</span>
+  </div>
+  <a href="Profile.dc.html" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.4);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">Profile</a>
+</nav>
+
+<!-- HERO -->
+<section style="background:#0D0D0D;padding:120px 48px 80px;position:relative;overflow:hidden;">
+  <div style="position:absolute;left:0;top:0;bottom:0;width:3px;background:#A8FF3E;"></div>
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 24px;">Brane Enterprises · 2019–2024 · Senior Lead</p>
+    <h1 style="font-family:'Syne',sans-serif;font-size:clamp(48px,7vw,88px);font-weight:800;color:#fff;line-height:0.95;letter-spacing:-0.03em;margin:0 0 28px;max-width:900px;">No-Code Enterprise Platform</h1>
+    <p style="font-family:'Inter',sans-serif;font-size:18px;color:rgba(255,255,255,0.55);line-height:1.65;max-width:620px;margin:0 0 52px;">Natural language → enterprise ERP, CRM, SCM in minutes. Zero developers. Led a 12-member team delivering 90% time and cost savings at scale.</p>
+    <div style="display:flex;gap:40px;flex-wrap:wrap;">
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px;">My Role</p><p style="font-family:'Inter',sans-serif;font-size:15px;color:#fff;margin:0;font-weight:500;">UX Strategy, Architecture &amp; Design</p></div>
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px;">Team</p><p style="font-family:'Inter',sans-serif;font-size:15px;color:#fff;margin:0;font-weight:500;">12-member cross-functional team</p></div>
+      <div><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px;">Duration</p><p style="font-family:'Inter',sans-serif;font-size:15px;color:#fff;margin:0;font-weight:500;">5 years (2019–2024)</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT STRIP -->
+<section style="background:#111;border-top:1px solid rgba(255,255,255,0.04);border-bottom:1px solid rgba(255,255,255,0.04);padding:48px;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0;" class="cs-stats" style="border:1px solid rgba(255,255,255,0.06);border-radius:8px;overflow:hidden;">
+    <div style="padding:32px 40px;border-right:1px solid rgba(255,255,255,0.06);"><p style="font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">90<span style="color:#A8FF3E;font-size:40px;">%</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Less development time</p></div>
+    <div style="padding:32px 40px;border-right:1px solid rgba(255,255,255,0.06);"><p style="font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">90<span style="color:#A8FF3E;font-size:40px;">%</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Less development cost</p></div>
+    <div style="padding:32px 40px;"><p style="font-family:'Syne',sans-serif;font-size:56px;font-weight:800;color:#fff;margin:0;line-height:1;letter-spacing:-0.04em;">200<span style="color:#A8FF3E;font-size:40px;">+</span></p><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);letter-spacing:0.1em;text-transform:uppercase;margin:10px 0 0;">Integrations delivered</p></div>
+  </div>
+</section>
+
+<!-- PRODUCT SCREENSHOT 1: Main Builder UI -->
+<section style="background:#F7F5F0;padding:80px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 12px;">Product · Builder Interface</p>
+    <p style="font-family:'Inter',sans-serif;font-size:15px;color:#888;margin:0 0 32px;">The no-code platform builder — natural language input auto-generates the full application UI, database schema, and business logic.</p>
+    <!-- Browser mockup -->
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,0.2);">
+      <div style="background:#1A1A1A;padding:11px 16px;display:flex;align-items:center;gap:6px;">
+        <div style="width:11px;height:11px;border-radius:50%;background:#FF5F57;"></div>
+        <div style="width:11px;height:11px;border-radius:50%;background:#FEBC2E;"></div>
+        <div style="width:11px;height:11px;border-radius:50%;background:#28C840;"></div>
+        <div style="flex:1;background:#0D0D0D;border-radius:5px;height:24px;display:flex;align-items:center;justify-content:center;margin:0 10px;"><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.35);">fleet.sears.com — Built on Brane No-Code Platform</span></div>
+      </div>
+      <img src="assets/screenshots/nocode/nocode-image7.png" style="width:100%;display:block;" alt="Sears Fleet Management — enterprise app built on no-code platform">
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SCREENSHOT 1b: eFundz Loan App -->
+<section style="background:#fff;padding:0 48px 80px;">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.1);">
+      <div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;">
+        <div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div>
+        <div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div>
+        <div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div>
+        <div style="flex:1;background:#0D0D0D;border-radius:4px;height:18px;display:flex;align-items:center;justify-content:center;margin:0 8px;"><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);">eFundz — Loan Application</span></div>
+      </div>
+      <img src="assets/screenshots/nocode/nocode-image9.png" style="width:100%;display:block;" alt="eFundz Loan Application">
+    </div>
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.1);">
+      <div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;">
+        <div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div>
+        <div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div>
+        <div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div>
+        <div style="flex:1;background:#0D0D0D;border-radius:4px;height:18px;display:flex;align-items:center;justify-content:center;margin:0 8px;"><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);">DigiCars — Automotive Platform</span></div>
+      </div>
+      <img src="assets/screenshots/nocode/nocode-image13.png" style="width:100%;display:block;" alt="DigiCars Automotive Platform">
+    </div>
+  </div>
+</section>
+
+<!-- PLACEHOLDER for old product screenshot 1 end -->
+<div style="display:none;"><!-- App toolbar below is replaced -->
+        <div style="display:flex;align-items:center;gap:14px;">
+          <div style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#111;">Brane Platform</div>
+          <div style="width:1px;height:18px;background:#E8EAED;"></div>
+          <span style="font-family:'Inter',sans-serif;font-size:13px;color:#374151;">Customer CRM</span>
+          <span style="background:#ECFDF5;color:#065F46;font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;">Auto-generated ✓</span>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <div style="border:1px solid #E8EAED;padding:6px 14px;border-radius:4px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;cursor:pointer;">Preview</div>
+          <div style="border:1px solid #E8EAED;padding:6px 14px;border-radius:4px;font-family:'Inter',sans-serif;font-size:12px;color:#374151;">Share</div>
+          <div style="background:#A8FF3E;padding:6px 18px;border-radius:4px;font-family:'Syne',sans-serif;font-size:12px;font-weight:700;color:#0D0D0D;">Publish</div>
+        </div>
+      </div>
+      <!-- NL Input bar -->
+      <div style="background:#EEF2FF;border-bottom:1px solid #E0E7FF;padding:10px 16px;display:flex;align-items:center;gap:10px;">
+        <div style="background:#6366F1;padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#fff;white-space:nowrap;flex-shrink:0;">AI Prompt</div>
+        <span style="font-family:'Inter',sans-serif;font-size:13px;color:#4338CA;font-style:italic;flex:1;">"Create a customer management module with name, email, phone, status tracking, company, notes and deal value"</span>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#6366F1;white-space:nowrap;">Generated in 3.2s ✓</span>
+      </div>
+      <!-- Three-panel builder -->
+      <div style="display:grid;grid-template-columns:200px 1fr 210px;" class="cs-mock" style="unused:0;height:480px;background:#F8F9FA;">
+        <!-- Left panel -->
+        <div style="background:#fff;border-right:1px solid #E8EAED;padding:14px;overflow-y:auto;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 12px;">Generated Fields</p>
+          <div style="background:#EEF2FF;border-radius:4px;padding:8px 10px;margin-bottom:4px;display:flex;align-items:center;gap:8px;border-left:3px solid #6366F1;cursor:pointer;"><div style="width:7px;height:7px;border-radius:50%;background:#6366F1;flex-shrink:0;"></div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#1F2937;flex:1;">Customer Name</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Text</span></div>
+          <div style="border:1px solid #E8EAED;border-radius:4px;padding:8px 10px;margin-bottom:4px;display:flex;align-items:center;gap:8px;cursor:pointer;"><div style="width:7px;height:7px;border-radius:50%;background:#10B981;flex-shrink:0;"></div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#1F2937;flex:1;">Email</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Email</span></div>
+          <div style="border:1px solid #E8EAED;border-radius:4px;padding:8px 10px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#F59E0B;flex-shrink:0;"></div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#1F2937;flex:1;">Phone</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Phone</span></div>
+          <div style="border:1px solid #E8EAED;border-radius:4px;padding:8px 10px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#EF4444;flex-shrink:0;"></div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#1F2937;flex:1;">Status</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Select</span></div>
+          <div style="border:1px solid #E8EAED;border-radius:4px;padding:8px 10px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#8B5CF6;flex-shrink:0;"></div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#1F2937;flex:1;">Company</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Text</span></div>
+          <div style="border:1px solid #E8EAED;border-radius:4px;padding:8px 10px;margin-bottom:4px;display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#06B6D4;flex-shrink:0;"></div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#1F2937;flex:1;">Deal Value</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">Currency</span></div>
+          <div style="border:1px solid #E8EAED;border-radius:4px;padding:8px 10px;margin-bottom:16px;display:flex;align-items:center;gap:8px;"><div style="width:7px;height:7px;border-radius:50%;background:#EC4899;flex-shrink:0;"></div><span style="font-family:'Inter',sans-serif;font-size:12px;color:#1F2937;flex:1;">Notes</span><span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#9CA3AF;">TextArea</span></div>
+          <div style="border:1px dashed #D1D5DB;border-radius:4px;padding:8px 10px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;"><span style="font-family:'Inter',sans-serif;font-size:12px;color:#9CA3AF;">+ Add field</span></div>
+          <div style="border-top:1px solid #E8EAED;margin-top:16px;padding-top:14px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 10px;">View Types</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;">
+              <div style="background:#6366F1;border-radius:4px;padding:6px;text-align:center;font-family:'Inter',sans-serif;font-size:11px;color:#fff;font-weight:500;">Form</div>
+              <div style="background:#F3F4F6;border-radius:4px;padding:6px;text-align:center;font-family:'Inter',sans-serif;font-size:11px;color:#374151;">Table</div>
+              <div style="background:#F3F4F6;border-radius:4px;padding:6px;text-align:center;font-family:'Inter',sans-serif;font-size:11px;color:#374151;">Card</div>
+              <div style="background:#F3F4F6;border-radius:4px;padding:6px;text-align:center;font-family:'Inter',sans-serif;font-size:11px;color:#374151;">Report</div>
+            </div>
+          </div>
+        </div>
+        <!-- Center canvas -->
+        <div style="padding:24px;display:flex;justify-content:center;align-items:flex-start;overflow-y:auto;">
+          <div style="background:#fff;border-radius:8px;box-shadow:0 2px 16px rgba(0,0,0,0.1);padding:28px;width:100%;max-width:460px;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;"><h3 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#111;margin:0;">Add New Customer</h3><div style="background:#ECFDF5;padding:4px 10px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:10px;color:#065F46;">AI Generated</div></div>
+            <div style="margin-bottom:14px;"><label style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#374151;display:block;margin-bottom:5px;letter-spacing:0.06em;text-transform:uppercase;">Customer Name <span style="color:#EF4444;">*</span></label><div style="border:2px solid #6366F1;border-radius:5px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px;color:#111;background:#fff;">Acme Corporation</div></div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+              <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#374151;display:block;margin-bottom:5px;letter-spacing:0.06em;text-transform:uppercase;">Email</label><div style="border:1px solid #E8EAED;border-radius:5px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px;color:#9CA3AF;">hello@acme.com</div></div>
+              <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#374151;display:block;margin-bottom:5px;letter-spacing:0.06em;text-transform:uppercase;">Phone</label><div style="border:1px solid #E8EAED;border-radius:5px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px;color:#9CA3AF;">+91 98765...</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+              <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#374151;display:block;margin-bottom:5px;letter-spacing:0.06em;text-transform:uppercase;">Status</label><div style="border:1px solid #E8EAED;border-radius:5px;padding:10px 12px;display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:14px;color:#374151;"><span>Active</span><span style="color:#9CA3AF;">▾</span></div></div>
+              <div><label style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#374151;display:block;margin-bottom:5px;letter-spacing:0.06em;text-transform:uppercase;">Deal Value</label><div style="border:1px solid #E8EAED;border-radius:5px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px;color:#9CA3AF;">₹ 2,50,000</div></div>
+            </div>
+            <div style="margin-bottom:14px;"><label style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#374151;display:block;margin-bottom:5px;letter-spacing:0.06em;text-transform:uppercase;">Company</label><div style="border:1px solid #E8EAED;border-radius:5px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px;color:#9CA3AF;">Acme Technologies Ltd</div></div>
+            <div style="margin-bottom:20px;"><label style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#374151;display:block;margin-bottom:5px;letter-spacing:0.06em;text-transform:uppercase;">Notes</label><div style="border:1px solid #E8EAED;border-radius:5px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:14px;color:#9CA3AF;min-height:60px;">Met at SaaSBoomi conference...</div></div>
+            <div style="display:flex;gap:10px;"><div style="flex:1;background:#6366F1;border-radius:5px;padding:12px;text-align:center;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:#fff;">Save Customer</div><div style="background:#F3F4F6;border-radius:5px;padding:12px 20px;font-family:'Inter',sans-serif;font-size:14px;color:#374151;">Cancel</div></div>
+          </div>
+        </div>
+        <!-- Right panel -->
+        <div style="background:#fff;border-left:1px solid #E8EAED;padding:14px;overflow-y:auto;">
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:#9CA3AF;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 14px;">Field Properties</p>
+          <div style="background:#EEF2FF;border-radius:6px;padding:10px;margin-bottom:14px;border-left:3px solid #6366F1;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#4338CA;margin:0 0 4px;letter-spacing:0.06em;text-transform:uppercase;">Selected</p><p style="font-family:'Inter',sans-serif;font-size:13px;font-weight:600;color:#1F2937;margin:0;">Customer Name</p></div>
+          <div style="margin-bottom:10px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0 0 4px;letter-spacing:0.04em;">Display Label</p><div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#111;">Customer Name</div></div>
+          <div style="margin-bottom:10px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0 0 4px;letter-spacing:0.04em;">Field Type</p><div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;display:flex;justify-content:space-between;font-family:'Inter',sans-serif;font-size:12px;color:#374151;"><span>Text</span><span>▾</span></div></div>
+          <div style="margin-bottom:10px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0 0 4px;letter-spacing:0.04em;">Placeholder</p><div style="border:1px solid #E8EAED;border-radius:4px;padding:7px 10px;font-family:'Inter',sans-serif;font-size:12px;color:#9CA3AF;">Enter name...</div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0;letter-spacing:0.04em;">Required</p><div style="width:32px;height:18px;background:#6366F1;border-radius:9px;position:relative;"><div style="width:13px;height:13px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2.5px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0;letter-spacing:0.04em;">Searchable</p><div style="width:32px;height:18px;background:#6366F1;border-radius:9px;position:relative;"><div style="width:13px;height:13px;background:#fff;border-radius:50%;position:absolute;right:2px;top:2.5px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div></div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#6B7280;margin:0;letter-spacing:0.04em;">In List View</p><div style="width:32px;height:18px;background:#E5E7EB;border-radius:9px;position:relative;"><div style="width:13px;height:13px;background:#fff;border-radius:50%;position:absolute;left:2px;top:2.5px;box-shadow:0 1px 3px rgba(0,0,0,0.2);"></div></div></div>
+          <div style="background:#F0FDF4;border:1px solid #BBF7D0;border-radius:4px;padding:10px;">
+            <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#166534;margin:0 0 4px;">✓ AI-suggested</p>
+            <p style="font-family:'Inter',sans-serif;font-size:11px;color:#166534;margin:0;line-height:1.4;">Type and constraints auto-detected from natural language input</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT SCREENSHOT 2: Table View -->
+<section style="background:#0D0D0D;padding:80px 48px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.14em;color:#A8FF3E;text-transform:uppercase;margin:0 0 12px;">Product · Enterprise Apps Built on the Platform</p>
+    <p style="font-family:'Inter',sans-serif;font-size:15px;color:rgba(255,255,255,0.5);margin:0 0 32px;">Real enterprise clients' apps — from retail to healthcare — built with zero code on the no-code platform.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;" class="cs-img2col" style="unused:0;">
+      <div style="border-radius:10px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.5);"><div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);margin-left:8px;">Sears — Coupon Database · Table View</span></div>
+        <img src="assets/screenshots/nocode/nocode-image14.png" style="width:100%;display:block;" alt="Sears Coupon Database">
+      </div>
+      <div style="border-radius:10px;overflow:hidden;box-shadow:0 16px 48px rgba(0,0,0,0.5);"><div style="background:#1A1A1A;padding:8px 12px;display:flex;align-items:center;gap:5px;"><div style="width:9px;height:9px;border-radius:50%;background:#FF5F57;"></div><div style="width:9px;height:9px;border-radius:50%;background:#FEBC2E;"></div><div style="width:9px;height:9px;border-radius:50%;background:#28C840;"></div><span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.3);margin-left:8px;">VRIM Connect — Healthcare Dashboard</span></div>
+        <img src="assets/screenshots/nocode/nocode-image23.png" style="width:100%;display:block;" alt="VRIM Healthcare Dashboard">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHALLENGE + PROCESS -->

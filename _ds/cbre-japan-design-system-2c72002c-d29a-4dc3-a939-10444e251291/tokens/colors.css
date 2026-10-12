@@ -1,0 +1,85 @@
+/* ============================================================
+   CBRE Japan — Color Tokens
+   Based on the CBRE global brand palette (2021 system).
+   "We don't just apply one color across our media; we use
+   colors creatively and with variety." CBRE Green leads,
+   Accent Green is used SPARINGLY as a digital highlight.
+   ============================================================ */
+
+:root {
+  /* ---------- Primary palette ---------- */
+  --cbre-green: #003F2D;        /* primary brand green — the anchor */
+  --cbre-dark-green: #012A2D;   /* deepest green, backgrounds */
+  --cbre-accent-green: #17E88F; /* electric accent — sparingly, digital */
+
+  /* ---------- Secondary palette ---------- */
+  --cbre-midnight: #032842;
+  --cbre-midnight-tint: #778F9C;
+  --cbre-sage: #538184;
+  --cbre-sage-tint: #96B3B6;
+  --cbre-celadon: #80BBAD;
+  --cbre-celadon-tint: #C0D4CB;
+  --cbre-wheat: #DBD99A;
+  --cbre-wheat-tint: #EFECD2;
+  --cbre-cement: #7F8480;
+  --cbre-cement-tint: #CBCDCB;
+
+  /* ---------- Neutrals ---------- */
+  --cbre-dark-grey: #435254;
+  --cbre-grey: #7F8A8C;
+  --cbre-light-grey: #CAD1D3;
+  --cbre-white: #FFFFFF;
+  --cbre-off-white: #F7F9F8;   /* faint green-tinted page wash */
+
+  /* ---------- Data visualization palette (per 2026 guidelines) ---------- */
+  --data-celadon: #80BBAD;
+  --data-orange: #D2785A;
+  --data-purple: #885073;
+  --data-light-purple: #A388BF;
+  --data-blue: #1F3765;
+  --data-light-blue: #3E7CA6;
+  --data-wheat: #DBD99A;
+  --data-negative: #AD2A2A;  /* only for negative values */
+
+  /* ============================================================
+     Semantic aliases — reference these in components
+     ============================================================ */
+
+  /* Text */
+  --text-strong: var(--cbre-green);        /* headings on light */
+  --text-body: var(--cbre-dark-grey);      /* body copy */
+  --text-muted: var(--cbre-grey);          /* secondary / captions */
+  --text-on-dark: var(--cbre-white);       /* text on green/dark */
+  --text-on-dark-muted: var(--cbre-celadon-tint);
+  --text-link: var(--cbre-green);
+  --text-accent: var(--cbre-green);
+
+  /* Surfaces */
+  --surface-page: var(--cbre-white);
+  --surface-page-alt: var(--cbre-off-white);
+  --surface-card: var(--cbre-white);
+  --surface-sunken: var(--cbre-cement-tint);
+  --surface-inverse: var(--cbre-green);
+  --surface-inverse-deep: var(--cbre-dark-green);
+  --surface-accent: var(--cbre-accent-green);
+
+  /* Borders & lines */
+  --border-subtle: #E2E7E5;
+  --border-default: var(--cbre-light-grey);
+  --border-strong: var(--cbre-dark-grey);
+  --border-inverse: rgba(255, 255, 255, 0.18);
+
+  /* Interactive */
+  --action-primary: var(--cbre-green);
+  --action-primary-hover: #002A1E;     /* darken */
+  --action-primary-active: #001F16;
+  --action-accent: var(--cbre-accent-green);
+  --action-accent-hover: #11C879;
+  --focus-ring: var(--cbre-accent-green);
+
+  /* Status (kept on-brand, derived from palette) */
+  --status-success: #1F8A5B;
+  --status-warning: var(--data-orange);
+  --status-error: var(--data-negative);
+  --status-info: var(--data-blue);
+}

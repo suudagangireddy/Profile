@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <script src="./image-slot.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: #F9F8F6; }
+    a { text-decoration: none; color: inherit; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.85)} }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes modalIn { from { opacity:0; transform:translateY(16px) scale(0.97); } to { opacity:1; transform:translateY(0) scale(1); } }
+    @keyframes orbDrift { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(40px,-30px) scale(1.05);} 66%{transform:translate(-20px,20px) scale(0.97);} }
+    .fade-in { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
+    .fade-in-1 { animation-delay: 0.1s; }
+    .fade-in-2 { animation-delay: 0.25s; }
+    .fade-in-3 { animation-delay: 0.4s; }
+    .contact-input { width:100%; font-family:'Outfit',sans-serif; font-size:15px; color:#0D0D0D; background:#F9F8F6; border:1.5px solid #E8E5E0; border-radius:8px; padding:13px 16px; outline:none; transition:border-color 0.15s; box-sizing:border-box; }
+    .contact-input:focus { border-color:#0D0D0D; background:#fff; }
+    .contact-input::placeholder { color:#BBB; }
+    .skill-tag:hover { background:#0D0D0D; color:#A8FF3E; }
+    .work-row:hover { background: rgba(168,255,62,0.04); }
+    @media (max-width:768px) {
+      .site-nav { padding:0 20px !important; }
+      .nav-links { display:none !important; }
+      .profile-hero { flex-direction:column !important; padding:88px 20px 60px !important; gap:40px !important; }
+      .profile-photo { width:120px !important; height:120px !important; flex-shrink:0 !important; }
+      .skills-row { gap:8px !important; }
+      .exp-grid { grid-template-columns:1fr !important; gap:0 !important; }
+      section { padding-left:20px !important; padding-right:20px !important; }
+    }
+  </style>
+</helmet>
+
+<!-- NAV -->
+<nav id="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;align-items:center;padding:0 44px;justify-content:space-between;background:#0D0D0D;" class="site-nav">
+  <a href="index.html" style="display:flex;flex-direction:column;gap:3px;text-decoration:none;flex-shrink:0;">
+    <span style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;">Gangi Reddy Suuda</span>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.28);letter-spacing:0.07em;line-height:1;">Hyderabad, IN /</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:36px;" class="nav-links">
+    <a href="Portfolio.dc.html#work" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Work</a>
+    <a href="Profile.dc.html" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:#fff;text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#fff'">Profile</a>
+    <a href="Portfolio.dc.html#about" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">About</a>
+    <div style="width:1px;height:14px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
+    <button onClick="{{ openModal }}" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#A8FF3E;background:none;border:none;cursor:pointer;padding:0;letter-spacing:-0.01em;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Let's talk →</button>
+  </div>
+</nav>
+
+<!-- CONTACT MODAL -->
+<sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:500;background:rgba(13,13,13,0.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;">
+    <div onClick="{{ stopProp }}" style="background:#fff;border-radius:16px;width:100%;max-width:440px;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,0.22);animation:modalIn 0.25s cubic-bezier(0.22,1,0.36,1) both;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;">
+        <div>
+          <h2 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#0D0D0D;margin:0 0 4px;letter-spacing:-0.02em;">Let's work together</h2>
+          <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#999;margin:0;">Leave your details — I'll get back within 24h.</p>
+        </div>
+        <button onClick="{{ closeModal }}" style="background:none;border:none;cursor:pointer;padding:4px;color:#BBB;font-size:20px;line-height:1;margin-top:-4px;" style-hover="color:#0D0D0D">✕</button>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div>
+          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Full name</label>
+          <input class="contact-input" type="text" placeholder="e.g. Priya Sharma" value="{{ formName }}" onInput="{{ onName }}">
+        </div>
+        <div>
+          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Email address</label>
+          <input class="contact-input" type="email" placeholder="e.g. priya@company.com" value="{{ formEmail }}" onInput="{{ onEmail }}">
+        </div>
+        <div>
+          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Mobile number</label>
+          <input class="contact-input" type="tel" placeholder="e.g. +91 98765 43210" value="{{ formMobile }}" onInput="{{ onMobile }}">
+        </div>
+        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+          <div style="background:#F0FFF0;border:1.5px solid #A8FF3E;border-radius:8px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
+            <span style="font-size:18px;">✓</span>
+            <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#0D0D0D;margin:0;">Message sent — I'll reply soon!</p>
+          </div>
+        </sc-if>
+        <button onClick="{{ submit }}" style="background:#0D0D0D;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:8px;border:none;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#1a1a1a">
+          Send message <span style="color:#A8FF3E;">→</span>
+        </button>
+        <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#CCC;text-align:center;margin:0;letter-spacing:0.06em;text-transform:uppercase;">Your message goes directly to suudagangireddy@gmail.com</p>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- HERO: PROFILE SPLIT -->
+<section style="background:#0D0D0D;padding:120px 40px 80px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+    <div style="position:absolute;width:60%;height:80%;top:-10%;right:-5%;background:radial-gradient(circle,rgba(168,255,62,0.05) 0%,transparent 65%);animation:orbDrift 20s ease-in-out infinite;"></div>
+  </div>
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:72px;position:relative;z-index:2;" class="profile-hero">
+    <!-- Photo -->
+    <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:16px;">
+      <div style="width:180px;height:180px;" class="profile-photo">
+        <image-slot id="profile-photo" shape="circle" placeholder="Drop your photo here" style="width:180px;height:180px;"></image-slot>
+      </div>
+      
+    </div>
+
+    <!-- Bio -->
+    <div style="flex:1;min-width:0;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(168,255,62,0.7);letter-spacing:0.12em;text-transform:uppercase;margin:0 0 16px;" class="fade-in fade-in-1">Principal Product Designer · AI UX Lead</p>
+      <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;color:#fff;margin:0 0 24px;letter-spacing:-0.03em;line-height:1.05;" class="fade-in fade-in-1">Gangi Reddy Suuda</h1>
+      <p style="font-family:'Outfit',sans-serif;font-size:17px;color:rgba(255,255,255,0.55);line-height:1.75;max-width:540px;margin:0 0 36px;text-wrap:pretty;" class="fade-in fade-in-2">13+ years designing enterprise software and AI products — from no-code platforms serving global enterprises to Capital Markets AI at CBRE. I make complexity feel obvious.</p>
+
+      <!-- Quick stats -->
+      <div style="display:flex;gap:0;margin-bottom:40px;border:1px solid rgba(255,255,255,0.08);border-radius:8px;overflow:hidden;" class="fade-in fade-in-2">
+        <div style="flex:1;padding:20px 24px;border-right:1px solid rgba(255,255,255,0.08);">
+          <p style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#A8FF3E;margin:0;letter-spacing:-0.03em;line-height:1;">13+</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);margin:4px 0 0;letter-spacing:0.07em;text-transform:uppercase;">Years exp.</p>
+        </div>
+        <div style="flex:1;padding:20px 24px;border-right:1px solid rgba(255,255,255,0.08);">
+          <p style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#fff;margin:0;letter-spacing:-0.03em;line-height:1;">8</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);margin:4px 0 0;letter-spacing:0.07em;text-transform:uppercase;">Case studies</p>
+        </div>
+        <div style="flex:1;padding:20px 24px;">
+          <p style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#fff;margin:0;letter-spacing:-0.03em;line-height:1;">12</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);margin:4px 0 0;letter-spacing:0.07em;text-transform:uppercase;">Team led</p>
+        </div>
+      </div>
+
+      <!-- CTAs -->
+      <div style="display:flex;gap:12px;flex-wrap:wrap;" class="fade-in fade-in-3">
+        <button onClick="{{ openModal }}" style="background:#A8FF3E;color:#0D0D0D;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:13px 28px;border-radius:4px;border:none;cursor:pointer;letter-spacing:-0.01em;">Hire me</button>
+        <a href="Portfolio.dc.html#work" style="border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.65);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;padding:13px 28px;border-radius:4px;display:inline-block;" style-hover="border-color:rgba(255,255,255,0.3);color:#fff">View work →</a>
+        <a href="https://www.linkedin.com/in/gangi-reddy-suuda-02664b71" target="_blank" style="border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-family:'JetBrains Mono',monospace;font-size:11px;padding:13px 20px;border-radius:4px;display:inline-block;letter-spacing:0.04em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.7)">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section style="background:#fff;padding:72px 40px;border-bottom:1px solid #E8E5E0;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#BBB;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 28px;">Expertise</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;" class="skills-row">
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #0D0D0D;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">AI UX Design</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Enterprise SaaS</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">LLM Interfaces</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">No-Code Platforms</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Design Systems</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">User Research</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Agentic AI</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Data-Dense UX</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Figma · Prototyping</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Mobile · iOS · Android</span>
+      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Team Leadership</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE TIMELINE -->
+<section style="background:#F9F8F6;padding:80px 40px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#BBB;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 48px;">Experience</p>
+
+    <div style="display:flex;flex-direction:column;gap:0;">
+      <!-- CBRE -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2024 — Present</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
+            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Principal Product Designer</h3>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">CBRE</span>
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0 0 12px;">Designing AI-powered Capital Markets tools — Document Abstractor, India Operations Platform. Leading the AI UX practice for D&amp;T India.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#A8FF3E;background:#0D0D0D;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Capital Markets AI</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Enterprise</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- No-Code / Enterprise -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2019 — 2024</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
+            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Head of Product Design</h3>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">No-Code Platform</span>
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0 0 12px;">Led a 12-member design team building an AI platform generating full enterprise apps from natural language. 90% reduction in delivery time and cost. Shipped Stringer (private LLM), Notepad, Template Builder.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">AI Platform</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">12-member team</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">200+ integrations</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shukhibhava -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2017 — 2019</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
+            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Co-founder · Product Design</h3>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">Shukhibhava</span>
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0 0 12px;">Co-founded a healthcare SaaS platform connecting patients to holistic wellness providers. Led product strategy, UX, and early growth.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Healthcare SaaS</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Co-founder</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earlier -->
+      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;border-bottom:1px solid #E8E5E0;">
+        <div>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2013 — 2017</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+        </div>
+        <div>
+          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
+            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Senior UX Designer</h3>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">Various · Sears, eFundz, DigiCars</span>
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0;">Designed enterprise and consumer digital products across automotive, fintech, and fleet management — building the cross-domain fluency that underpins today's AI work.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SELECTED WORK -->
+<section style="background:#fff;padding:80px 40px;">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;">
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#BBB;letter-spacing:0.12em;text-transform:uppercase;margin:0;">Selected work</p>
+      <a href="Portfolio.dc.html#work" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.06em;text-transform:uppercase;" style-hover="color:#0D0D0D">All projects →</a>
+    </div>
+
+    <a href="CS-NoCode.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">01</span>
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">No-Code Enterprise Platform</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">AI-generated enterprise apps — 90% cost reduction</p>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
+    </a>
+
+    <a href="CS-Stringer.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">02</span>
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Stringer — Private LLM Platform</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">Enterprise-secure AI chat running on a private LLM</p>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
+    </a>
+
+    <a href="CS-Curaway.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">03</span>
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Curaway.ai — Agentic AI Health Concierge</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">End-to-end patient journey orchestrated by agentic AI</p>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
+    </a>
+
+    <a href="CS-DocAbstractor.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;border-bottom:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">04</span>
+      <div>
+        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Capital Markets Document Abstractor — CBRE</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">AI extraction with confidence scoring and source traceability</p>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT FOOTER -->
+<section style="background:#0D0D0D;padding:80px 40px;">
+  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:40px;">
+    <div>
+      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Based in Hyderabad · Working worldwide</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;margin:0;letter-spacing:-0.02em;line-height:1.1;text-wrap:pretty;">Ready to build something<br><span style="color:#A8FF3E;">that actually works?</span></h2>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <button onClick="{{ openModal }}" style="background:#A8FF3E;color:#0D0D0D;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:4px;border:none;cursor:pointer;">Email me</button>
+      <a href="https://www.linkedin.com/in/gangi-reddy-suuda-02664b71" target="_blank" style="border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.65);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border-radius:4px;display:inline-block;" style-hover="border-color:rgba(255,255,255,0.3)">LinkedIn ↗</a>
+      <a href="view_resume.html" target="_blank" style="border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-family:'JetBrains Mono',monospace;font-size:11px;padding:14px 20px;border-radius:4px;display:inline-block;letter-spacing:0.04em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.7)">Resume ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#080808;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.04);flex-wrap:wrap;gap:12px;">
+  <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.08em;text-transform:uppercase;">© 2026 Gangi Reddy Suuda</p>
+  <div style="display:flex;gap:20px;">
+    <a href="Portfolio.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.06em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.5)">Portfolio</a>
+    <a href="view_resume.html" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.06em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.5)">Resume</a>
+  </div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { modalOpen: false, submitted: false, name: '', email: '', mobile: '' };
+  componentDidMount() {
+    const st = document.createElement('style');
+    st.textContent = '.js-reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease}.js-reveal.revealed{opacity:1;transform:none}';
+    document.head.appendChild(st);
+    this._px = [];
+    document.querySelectorAll('section').forEach((sec, si) => {
+      if (si === 0) return;
+      Array.from(sec.children).forEach((el, i) => {
+        el.dataset.delay = String(i * 0.08);
+        el.classList.add('js-reveal');
+      });
+    });
+    document.querySelectorAll('section img').forEach((el) => {
+      el.style.willChange = 'transform';
+      this._px.push(el);
+    });
+    this._t = false;
+    this._onScroll = () => {
+      if (!this._t) {
+        requestAnimationFrame(() => { this._tick(); this._t = false; });
+        this._t = true;
+      }
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+    this._tick();
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const d = parseFloat(e.target.dataset.delay || '0');
+          setTimeout(() => e.target.classList.add('revealed'), d * 1000);
+          this._io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.js-reveal').forEach((el) => this._io.observe(el));
+  }
+  _tick() {
+    const sy = window.scrollY;
+    this._px.forEach((el) => { el.style.transform = 'translateY(' + (-sy * 0.04) + 'px)'; });
+  }
+  componentWillUnmount() {
+    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
+    if (this._io) this._io.disconnect();
+  }
+  renderVals() {
+    const s = this.state;
+    return {
+      modalOpen: s.modalOpen,
+      submitted: s.submitted,
+      formName: s.name,
+      formEmail: s.email,
+      formMobile: s.mobile,
+      openModal: () => this.setState({ modalOpen: true, submitted: false }),
+      closeModal: () => this.setState({ modalOpen: false, submitted: false, name: '', email: '', mobile: '' }),
+      stopProp: (e) => e.stopPropagation(),
+      onName:   (e) => this.setState({ name: e.target.value }),
+      onEmail:  (e) => this.setState({ email: e.target.value }),
+      onMobile: (e) => this.setState({ mobile: e.target.value }),
+      submit: () => {
+        const { name, email, mobile } = this.state;
+        if (!name.trim() || !email.trim()) return;
+        const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+        const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMobile: ${mobile}`);
+        window.open(`mailto:suudagangireddy@gmail.com?subject=${subject}&body=${body}`);
+        this.setState({ submitted: true });
+        setTimeout(() => this.setState({ modalOpen: false, submitted: false, name: '', email: '', mobile: '' }), 3000);
+      },
+    };
+  }
+}
+</script>
+</body>
+</html>

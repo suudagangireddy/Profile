@@ -1,0 +1,54 @@
+/* ============================================================
+   CBRE Japan — Spacing, Radius, Shadow, Layout
+   The CBRE system is precise and architectural: generous
+   whitespace, restrained corner radii, soft shadows.
+   ============================================================ */
+
+:root {
+  /* ---------- Spacing scale (4px base) ---------- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* ---------- Corner radii (restrained, architectural) ---------- */
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-pill: 999px;
+
+  /* ---------- Borders ---------- */
+  --border-width: 1px;          /* @kind spacing */
+  --border-width-strong: 2px;   /* @kind spacing */
+
+  /* ---------- Shadows (soft, low, green-neutral) ---------- */
+  --shadow-xs: 0 1px 2px rgba(3, 40, 29, 0.06);
+  --shadow-sm: 0 1px 3px rgba(3, 40, 29, 0.08), 0 1px 2px rgba(3, 40, 29, 0.04);
+  --shadow-md: 0 4px 12px rgba(3, 40, 29, 0.08), 0 2px 4px rgba(3, 40, 29, 0.04);
+  --shadow-lg: 0 12px 32px rgba(3, 40, 29, 0.10), 0 4px 8px rgba(3, 40, 29, 0.04);
+  --shadow-focus: 0 0 0 3px rgba(23, 232, 143, 0.45);
+
+  /* ---------- Layout ---------- */
+  --container-max: 1200px;
+  --container-wide: 1440px;
+  --gutter: var(--space-6);
+
+  /* ---------- Motion ---------- */
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);  /* @kind other */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);           /* @kind other */
+  --dur-fast: 120ms;    /* @kind other */
+  --dur-base: 200ms;    /* @kind other */
+  --dur-slow: 320ms;    /* @kind other */
+}
