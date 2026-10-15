@@ -45,12 +45,10 @@
 <nav id="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;align-items:center;padding:0 44px;justify-content:space-between;background:#0D0D0D;" class="site-nav">
   <a href="index.html" style="display:flex;flex-direction:column;gap:3px;text-decoration:none;flex-shrink:0;">
     <span style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;">Gangi Reddy Suuda</span>
-    <span style="font-family:'JetBrains Mono',monospace;font-size:8px;color:rgba(255,255,255,0.28);letter-spacing:0.07em;line-height:1;">Hyderabad, IN /</span>
   </a>
   <div style="display:flex;align-items:center;gap:36px;" class="nav-links">
     <a href="Portfolio.dc.html#work" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Work</a>
     <a href="Profile.dc.html" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:#fff;text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#fff'">Profile</a>
-    <a href="Portfolio.dc.html#about" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">About</a>
     <div style="width:1px;height:14px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
     <button onClick="{{ openModal }}" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#A8FF3E;background:none;border:none;cursor:pointer;padding:0;letter-spacing:-0.01em;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Let's talk →</button>
   </div>
@@ -104,7 +102,7 @@
     <!-- Photo -->
     <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:16px;">
       <div style="width:180px;height:180px;" class="profile-photo">
-        <image-slot id="profile-photo" shape="circle" placeholder="Drop your photo here" style="width:180px;height:180px;"></image-slot>
+        <img src="assets/profile-photo.png" style="width:180px;height:180px;border-radius:50%;object-fit:cover;object-position:center top;display:block;" alt="Gangi Reddy Suuda">
       </div>
       
     </div>
@@ -171,7 +169,7 @@
       <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
         <div>
           <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2024 — Present</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
         </div>
         <div>
           <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
@@ -190,7 +188,7 @@
       <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
         <div>
           <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2019 — 2024</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
         </div>
         <div>
           <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
@@ -210,7 +208,7 @@
       <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
         <div>
           <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2017 — 2019</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
         </div>
         <div>
           <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
@@ -229,7 +227,7 @@
       <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;border-bottom:1px solid #E8E5E0;">
         <div>
           <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2013 — 2017</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
         </div>
         <div>
           <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
@@ -252,39 +250,39 @@
     </div>
 
     <a href="CS-NoCode.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">01</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">01</span>
       <div>
         <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">No-Code Enterprise Platform</h3>
         <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">AI-generated enterprise apps — 90% cost reduction</p>
       </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
     </a>
 
     <a href="CS-Stringer.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">02</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">02</span>
       <div>
         <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Stringer — Private LLM Platform</h3>
         <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">Enterprise-secure AI chat running on a private LLM</p>
       </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
     </a>
 
     <a href="CS-Curaway.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">03</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">03</span>
       <div>
         <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Curaway.ai — Agentic AI Health Concierge</h3>
         <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">End-to-end patient journey orchestrated by agentic AI</p>
       </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
     </a>
 
     <a href="CS-DocAbstractor.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;border-bottom:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;">04</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">04</span>
       <div>
         <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Capital Markets Document Abstractor — CBRE</h3>
         <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">AI extraction with confidence scoring and source traceability</p>
       </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#C0BDB8;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
     </a>
   </div>
 </section>
