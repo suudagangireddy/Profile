@@ -1,363 +1,453 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Profile & Background — Gangi Reddy Suuda</title>
 <script src="./support.js"></script>
 </head>
 <body>
+
 <x-dc>
 <helmet>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-  <script src="./image-slot.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #F9F8F6; }
-    a { text-decoration: none; color: inherit; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.85)} }
-    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
-    @keyframes modalIn { from { opacity:0; transform:translateY(16px) scale(0.97); } to { opacity:1; transform:translateY(0) scale(1); } }
-    @keyframes orbDrift { 0%,100%{transform:translate(0,0) scale(1);} 33%{transform:translate(40px,-30px) scale(1.05);} 66%{transform:translate(-20px,20px) scale(0.97);} }
-    .fade-in { animation: fadeUp 0.7s cubic-bezier(0.16,1,0.3,1) both; }
-    .fade-in-1 { animation-delay: 0.1s; }
-    .fade-in-2 { animation-delay: 0.25s; }
-    .fade-in-3 { animation-delay: 0.4s; }
-    .contact-input { width:100%; font-family:'Outfit',sans-serif; font-size:15px; color:#0D0D0D; background:#F9F8F6; border:1.5px solid #E8E5E0; border-radius:8px; padding:13px 16px; outline:none; transition:border-color 0.15s; box-sizing:border-box; }
-    .contact-input:focus { border-color:#0D0D0D; background:#fff; }
-    .contact-input::placeholder { color:#BBB; }
-    .skill-tag:hover { background:#0D0D0D; color:#A8FF3E; }
-    .work-row:hover { background: rgba(168,255,62,0.04); }
-    @media (max-width:768px) {
-      .site-nav { padding:0 20px !important; }
-      .nav-links { display:none !important; }
-      .profile-hero { flex-direction:column !important; padding:88px 20px 60px !important; gap:40px !important; }
-      .profile-photo { width:120px !important; height:120px !important; flex-shrink:0 !important; }
-      .skills-row { gap:8px !important; }
-      .exp-grid { grid-template-columns:1fr !important; gap:0 !important; }
-      section { padding-left:20px !important; padding-right:20px !important; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #FFFFFF;
+      color: #111827;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 32px; }
+
+    /* Nav */
+    .nav-wrap {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid #F3F4F6; height: 64px;
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 100%; }
+    .brand-title { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: #111827; display: flex; align-items: center; gap: 10px; }
+    .brand-role { font-size: 13px; font-weight: 400; color: #6B7280; }
+    .nav-menu { display: flex; align-items: center; gap: 28px; }
+    .nav-item { font-size: 14px; font-weight: 500; color: #4B5563; transition: color 0.15s ease; }
+    .nav-item:hover, .nav-item.active { color: #111827; }
+    .btn-talk { font-size: 13px; font-weight: 500; padding: 7px 14px; background: #111827; color: #FFFFFF; border-radius: 6px; border: 1px solid #111827; cursor: pointer; transition: all 0.15s ease; }
+    .btn-talk:hover { background: #374151; }
+
+    /* Profile Hero */
+    .profile-hero {
+      padding-top: 144px;
+      padding-bottom: 72px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 56px;
+      align-items: flex-start;
+    }
+    .profile-avatar {
+      width: 180px;
+      height: 180px;
+      border-radius: 16px;
+      object-fit: cover;
+      object-position: top;
+      background: #F3F4F6;
+      border: 1px solid #E5E7EB;
+    }
+    .profile-name {
+      font-size: clamp(34px, 4.5vw, 48px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      color: #111827;
+      margin: 0 0 12px 0;
+      line-height: 1.1;
+    }
+    .profile-tagline {
+      font-size: 15px;
+      font-weight: 500;
+      color: #4F46E5;
+      margin: 0 0 20px 0;
+    }
+    .profile-bio {
+      font-size: 17px;
+      line-height: 1.65;
+      color: #4B5563;
+      margin: 0 0 32px 0;
+      max-width: 660px;
+    }
+    .profile-stats {
+      display: flex;
+      gap: 36px;
+      padding-top: 24px;
+      border-top: 1px solid #F3F4F6;
+    }
+    .stat-num {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #111827;
+    }
+    .stat-label {
+      font-size: 12.5px;
+      color: #6B7280;
+      margin-top: 2px;
+    }
+
+    /* Sections */
+    .content-sec {
+      padding: 64px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .sec-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #6B7280;
+      margin-bottom: 24px;
+    }
+
+    /* Skills Cloud */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .skill-chip {
+      font-size: 13.5px;
+      font-weight: 500;
+      color: #374151;
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.15s ease;
+    }
+    .skill-chip:hover {
+      border-color: #CBD5E1;
+      background: #FFFFFF;
+      color: #111827;
+    }
+    .skill-chip.primary {
+      background: #EEF2FF;
+      border-color: #E0E7FF;
+      color: #4338CA;
+    }
+
+    /* Experience Timeline */
+    .exp-list {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 32px;
+      align-items: baseline;
+    }
+    .exp-meta {
+      font-size: 13.5px;
+      color: #6B7280;
+    }
+    .exp-company {
+      font-size: 17px;
+      font-weight: 600;
+      color: #111827;
+      margin: 0 0 4px 0;
+      letter-spacing: -0.01em;
+    }
+    .exp-role {
+      font-size: 14.5px;
+      font-weight: 500;
+      color: #4F46E5;
+      margin: 0 0 12px 0;
+    }
+    .exp-desc {
+      font-size: 14.5px;
+      color: #4B5563;
+      line-height: 1.6;
+      margin: 0 0 14px 0;
+    }
+    .exp-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .exp-tag {
+      font-size: 11.5px;
+      color: #6B7280;
+      background: #F3F4F6;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #111827;
+      color: #FFFFFF;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid #111827;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-primary:hover { background: #2563EB; border-color: #2563EB; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFFFFF;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid #E5E7EB;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .btn-secondary:hover { background: #F9FAFB; border-color: #D1D5DB; color: #111827; }
+
+    /* Footer */
+    .footer { padding: 40px 0; border-top: 1px solid #F3F4F6; font-size: 13px; color: #6B7280; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(17, 24, 39, 0.4); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .modal-dialog { background: #FFFFFF; border-radius: 14px; width: 100%; max-width: 440px; padding: 32px; box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15); border: 1px solid #E5E7EB; position: relative; }
+    .modal-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: #9CA3AF; font-size: 18px; cursor: pointer; }
+    .form-group { margin-bottom: 16px; }
+    .form-label { display: block; font-size: 12px; font-weight: 500; color: #374151; margin-bottom: 6px; }
+    .form-input { width: 100%; padding: 10px 14px; border: 1px solid #D1D5DB; border-radius: 6px; font-size: 14px; font-family: inherit; color: #111827; outline: none; }
+    .form-btn { width: 100%; padding: 12px; background: #111827; color: #FFFFFF; border: none; border-radius: 6px; font-size: 14px; font-weight: 500; cursor: pointer; margin-top: 8px; }
+
+    @media (max-width: 768px) {
+      .profile-grid { grid-template-columns: 1fr; gap: 32px; }
+      .profile-avatar { width: 120px; height: 120px; }
+      .exp-item { grid-template-columns: 1fr; gap: 8px; }
+      .container { padding: 0 20px; }
+      .brand-role { display: none; }
+      .footer-inner { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
 </helmet>
 
-<!-- NAV -->
-<nav id="site-nav" style="position:fixed;top:0;left:0;right:0;z-index:300;height:60px;display:flex;align-items:center;padding:0 44px;justify-content:space-between;background:#0D0D0D;" class="site-nav">
-  <a href="index.html" style="display:flex;flex-direction:column;gap:3px;text-decoration:none;flex-shrink:0;">
-    <span style="font-family:'Outfit',sans-serif;font-size:15px;font-weight:800;color:#fff;letter-spacing:-0.02em;line-height:1;">Gangi Reddy Suuda</span>
-  </a>
-  <div style="display:flex;align-items:center;gap:36px;" class="nav-links">
-    <a href="Portfolio.dc.html#work" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.45);text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Work</a>
-    <a href="Profile.dc.html" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;color:#fff;text-decoration:none;letter-spacing:-0.01em;transition:color 0.15s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#fff'">Profile</a>
-    <div style="width:1px;height:14px;background:rgba(255,255,255,0.1);flex-shrink:0;"></div>
-    <button onClick="{{ openModal }}" style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#A8FF3E;background:none;border:none;cursor:pointer;padding:0;letter-spacing:-0.01em;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Let's talk →</button>
+<!-- NAVIGATION -->
+<header class="nav-wrap">
+  <div class="container nav-inner">
+    <a href="index.html" class="brand-title">
+      <span>Gangi Reddy Suuda</span>
+      <span class="brand-role">· Principal Designer</span>
+    </a>
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-item">Overview</a>
+      <a href="Portfolio.dc.html" class="nav-item">Work</a>
+      <a href="Profile.dc.html" class="nav-item active">Profile</a>
+      <button class="btn-talk" onClick="{{ openModal }}">Get in touch</button>
+    </nav>
   </div>
-</nav>
+</header>
 
 <!-- CONTACT MODAL -->
 <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
-  <div onClick="{{ closeModal }}" style="position:fixed;inset:0;z-index:500;background:rgba(13,13,13,0.7);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:24px;">
-    <div onClick="{{ stopProp }}" style="background:#fff;border-radius:16px;width:100%;max-width:440px;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,0.22);animation:modalIn 0.25s cubic-bezier(0.22,1,0.36,1) both;">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:28px;">
-        <div>
-          <h2 style="font-family:'Outfit',sans-serif;font-size:22px;font-weight:800;color:#0D0D0D;margin:0 0 4px;letter-spacing:-0.02em;">Let's work together</h2>
-          <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#999;margin:0;">Leave your details — I'll get back within 24h.</p>
-        </div>
-        <button onClick="{{ closeModal }}" style="background:none;border:none;cursor:pointer;padding:4px;color:#BBB;font-size:20px;line-height:1;margin-top:-4px;" style-hover="color:#0D0D0D">✕</button>
+  <div class="modal-overlay" onClick="{{ closeModal }}">
+    <div class="modal-dialog" onClick="{{ stopProp }}">
+      <button class="modal-close" onClick="{{ closeModal }}">✕</button>
+      <h3 style="font-size:20px; font-weight:600; color:#111827; margin:0 0 6px 0;">Let's connect</h3>
+      <p style="font-size:14px; color:#6B7280; margin:0 0 24px 0;">Leave a message and I will respond within 24 hours.</p>
+
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input class="form-input" type="text" placeholder="Your name" value="{{ formName }}" onInput="{{ onName }}">
       </div>
-      <div style="display:flex;flex-direction:column;gap:14px;">
-        <div>
-          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Full name</label>
-          <input class="contact-input" type="text" placeholder="e.g. Priya Sharma" value="{{ formName }}" onInput="{{ onName }}">
-        </div>
-        <div>
-          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Email address</label>
-          <input class="contact-input" type="email" placeholder="e.g. priya@company.com" value="{{ formEmail }}" onInput="{{ onEmail }}">
-        </div>
-        <div>
-          <label style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.08em;text-transform:uppercase;display:block;margin-bottom:6px;">Mobile number</label>
-          <input class="contact-input" type="tel" placeholder="e.g. +91 98765 43210" value="{{ formMobile }}" onInput="{{ onMobile }}">
-        </div>
-        <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
-          <div style="background:#F0FFF0;border:1.5px solid #A8FF3E;border-radius:8px;padding:14px 16px;display:flex;align-items:center;gap:10px;">
-            <span style="font-size:18px;">✓</span>
-            <p style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:#0D0D0D;margin:0;">Message sent — I'll reply soon!</p>
-          </div>
-        </sc-if>
-        <button onClick="{{ submit }}" style="background:#0D0D0D;color:#fff;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px;border-radius:8px;border:none;cursor:pointer;margin-top:4px;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:#1a1a1a">
-          Send message <span style="color:#A8FF3E;">→</span>
-        </button>
-        <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#CCC;text-align:center;margin:0;letter-spacing:0.06em;text-transform:uppercase;">Your message goes directly to suudagangireddy@gmail.com</p>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="you@company.com" value="{{ formEmail }}" onInput="{{ onEmail }}">
       </div>
+      <div class="form-group">
+        <label class="form-label">Phone (Optional)</label>
+        <input class="form-input" type="tel" placeholder="+1..." value="{{ formMobile }}" onInput="{{ onMobile }}">
+      </div>
+
+      <button class="form-btn" onClick="{{ submit }}">Send Message</button>
+      <p style="font-size:11px; color:#9CA3AF; margin:14px 0 0 0; text-align:center;">Direct: suudagangireddy@gmail.com</p>
     </div>
   </div>
 </sc-if>
 
-<!-- HERO: PROFILE SPLIT -->
-<section style="background:#0D0D0D;padding:120px 40px 80px;position:relative;overflow:hidden;">
-  <div style="position:absolute;inset:0;pointer-events:none;z-index:0;">
-    <div style="position:absolute;width:60%;height:80%;top:-10%;right:-5%;background:radial-gradient(circle,rgba(168,255,62,0.05) 0%,transparent 65%);animation:orbDrift 20s ease-in-out infinite;"></div>
-  </div>
-  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:flex-start;gap:72px;position:relative;z-index:2;" class="profile-hero">
-    <!-- Photo -->
-    <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:center;gap:16px;">
-      <div style="width:180px;height:180px;" class="profile-photo">
-        <img src="assets/profile-photo.png" style="width:180px;height:180px;border-radius:50%;object-fit:cover;object-position:center top;display:block;" alt="Gangi Reddy Suuda">
-      </div>
-      
-    </div>
-
-    <!-- Bio -->
-    <div style="flex:1;min-width:0;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(168,255,62,0.7);letter-spacing:0.12em;text-transform:uppercase;margin:0 0 16px;" class="fade-in fade-in-1">Principal Product Designer · AI UX Lead</p>
-      <h1 style="font-family:'Outfit',sans-serif;font-size:clamp(36px,5vw,64px);font-weight:800;color:#fff;margin:0 0 24px;letter-spacing:-0.03em;line-height:1.05;" class="fade-in fade-in-1">Gangi Reddy Suuda</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:17px;color:rgba(255,255,255,0.55);line-height:1.75;max-width:540px;margin:0 0 36px;text-wrap:pretty;" class="fade-in fade-in-2">13+ years designing enterprise software and AI products — from no-code platforms serving global enterprises to Capital Markets AI at CBRE. I make complexity feel obvious.</p>
-
-      <!-- Quick stats -->
-      <div style="display:flex;gap:0;margin-bottom:40px;border:1px solid rgba(255,255,255,0.08);border-radius:8px;overflow:hidden;" class="fade-in fade-in-2">
-        <div style="flex:1;padding:20px 24px;border-right:1px solid rgba(255,255,255,0.08);">
-          <p style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#A8FF3E;margin:0;letter-spacing:-0.03em;line-height:1;">13+</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);margin:4px 0 0;letter-spacing:0.07em;text-transform:uppercase;">Years exp.</p>
+<!-- PROFILE HERO -->
+<section class="profile-hero">
+  <div class="container">
+    <div class="profile-grid">
+      <img src="assets/profile-photo.png" alt="Gangi Reddy Suuda" class="profile-avatar">
+      <div>
+        <h1 class="profile-name">Gangi Reddy Suuda</h1>
+        <p class="profile-tagline">Principal Product Designer · AI Systems & Enterprise UX Lead</p>
+        <p class="profile-bio">13+ years designing complex enterprise software, AI interactions, and mission-critical workflows. Experienced in leading multi-disciplinary design teams, shaping zero-to-one product architectures, and translating deep business logic into clean, predictable user interfaces.</p>
+        
+        <div class="profile-stats">
+          <div>
+            <div class="stat-num">13+</div>
+            <div class="stat-label">Years of Experience</div>
+          </div>
+          <div>
+            <div class="stat-num">12</div>
+            <div class="stat-label">Design Team Led</div>
+          </div>
+          <div>
+            <div class="stat-num">8</div>
+            <div class="stat-label">Shipped Case Studies</div>
+          </div>
         </div>
-        <div style="flex:1;padding:20px 24px;border-right:1px solid rgba(255,255,255,0.08);">
-          <p style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#fff;margin:0;letter-spacing:-0.03em;line-height:1;">8</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);margin:4px 0 0;letter-spacing:0.07em;text-transform:uppercase;">Case studies</p>
-        </div>
-        <div style="flex:1;padding:20px 24px;">
-          <p style="font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:#fff;margin:0;letter-spacing:-0.03em;line-height:1;">12</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.35);margin:4px 0 0;letter-spacing:0.07em;text-transform:uppercase;">Team led</p>
-        </div>
-      </div>
 
-      <!-- CTAs -->
-      <div style="display:flex;gap:12px;flex-wrap:wrap;" class="fade-in fade-in-3">
-        <button onClick="{{ openModal }}" style="background:#A8FF3E;color:#0D0D0D;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:13px 28px;border-radius:4px;border:none;cursor:pointer;letter-spacing:-0.01em;">Hire me</button>
-        <a href="Portfolio.dc.html#work" style="border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.65);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;padding:13px 28px;border-radius:4px;display:inline-block;" style-hover="border-color:rgba(255,255,255,0.3);color:#fff">View work →</a>
-        <a href="https://www.linkedin.com/in/gangi-reddy-suuda-02664b71" target="_blank" style="border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-family:'JetBrains Mono',monospace;font-size:11px;padding:13px 20px;border-radius:4px;display:inline-block;letter-spacing:0.04em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.7)">LinkedIn ↗</a>
+        <div style="display:flex; gap:12px; margin-top:32px; flex-wrap:wrap;">
+          <button class="btn-primary" onClick="{{ openModal }}">Get in touch</button>
+          <a href="Portfolio.dc.html" class="btn-secondary">View Case Studies →</a>
+          <a href="view_resume.html" target="_blank" class="btn-secondary">Resume ↗</a>
+          <a href="https://www.linkedin.com/in/gangi-reddy-suuda-02664b71" target="_blank" class="btn-secondary">LinkedIn ↗</a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERTISE -->
-<section style="background:#fff;padding:72px 40px;border-bottom:1px solid #E8E5E0;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#BBB;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 28px;">Expertise</p>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;" class="skills-row">
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #0D0D0D;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">AI UX Design</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Enterprise SaaS</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">LLM Interfaces</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">No-Code Platforms</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Design Systems</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">User Research</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Agentic AI</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Data-Dense UX</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Figma · Prototyping</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Mobile · iOS · Android</span>
-      <span style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:500;color:#0D0D0D;background:#F9F8F6;border:1.5px solid #E8E5E0;border-radius:4px;padding:7px 14px;transition:background 0.15s,color 0.15s;cursor:default;" class="skill-tag">Team Leadership</span>
+<!-- CORE CAPABILITIES -->
+<section class="content-sec">
+  <div class="container">
+    <div class="sec-label">Core Competencies</div>
+    <div class="skills-grid">
+      <span class="skill-chip primary">AI UX & Interaction Design</span>
+      <span class="skill-chip primary">Enterprise SaaS Architecture</span>
+      <span class="skill-chip primary">LLM & Prompt Interface UX</span>
+      <span class="skill-chip">No-Code & Visual Builders</span>
+      <span class="skill-chip">Design Systems (Tokens, Figma)</span>
+      <span class="skill-chip">Data-Dense FinTech / PropTech UX</span>
+      <span class="skill-chip">Agentic AI & Workflow Orchestration</span>
+      <span class="skill-chip">User Research & Evaluative Testing</span>
+      <span class="skill-chip">Interactive Prototyping</span>
+      <span class="skill-chip">Cross-Functional Design Leadership</span>
+      <span class="skill-chip">Engineering Handoff & Implementation QA</span>
     </div>
   </div>
 </section>
 
 <!-- EXPERIENCE TIMELINE -->
-<section style="background:#F9F8F6;padding:80px 40px;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#BBB;letter-spacing:0.12em;text-transform:uppercase;margin:0 0 48px;">Experience</p>
+<section class="content-sec">
+  <div class="container">
+    <div class="sec-label">Professional Experience</div>
+    
+    <div class="exp-list">
 
-    <div style="display:flex;flex-direction:column;gap:0;">
       <!-- CBRE -->
-      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2024 — Present</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div>2024 — Present</div>
+          <div style="font-size:12px; color:#9CA3AF;">Hyderabad, India</div>
         </div>
         <div>
-          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
-            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Principal Product Designer</h3>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">CBRE</span>
-          </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0 0 12px;">Designing AI-powered Capital Markets tools — Document Abstractor, India Operations Platform. Leading the AI UX practice for D&amp;T India.</p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#A8FF3E;background:#0D0D0D;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Capital Markets AI</span>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Enterprise</span>
+          <h2 class="exp-company">CBRE</h2>
+          <div class="exp-role">Principal Product Designer</div>
+          <p class="exp-desc">Leading AI UX and enterprise tool design for Digital & Technology (D&T) India. Spearheading Capital Markets AI products including Document Abstractor and India Operations Platform, setting UX standards across internal and client-facing platforms.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Capital Markets AI</span>
+            <span class="exp-tag">Document Understanding</span>
+            <span class="exp-tag">Enterprise Workflow</span>
           </div>
         </div>
       </div>
 
-      <!-- No-Code / Enterprise -->
-      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2019 — 2024</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+      <!-- Brane -->
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div>2019 — 2024</div>
+          <div style="font-size:12px; color:#9CA3AF;">Hyderabad, India</div>
         </div>
         <div>
-          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
-            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Head of Product Design</h3>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">No-Code Platform</span>
-          </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0 0 12px;">Led a 12-member design team building an AI platform generating full enterprise apps from natural language. 90% reduction in delivery time and cost. Shipped Stringer (private LLM), Notepad, Template Builder.</p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">AI Platform</span>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">12-member team</span>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">200+ integrations</span>
+          <h2 class="exp-company">No-Code Enterprise Platform (Brane)</h2>
+          <div class="exp-role">Head of Product Design</div>
+          <p class="exp-desc">Led a 12-member product design team building an AI platform capable of generating enterprise ERP, CRM, and SCM systems from natural language. Concurrently designed and shipped Stringer (private LLM workspace), Notepad (team wiki/sprints), and Dynamic Template Builder. Achieved 90% reduction in development times.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Team Leadership (12)</span>
+            <span class="exp-tag">AI Application Builder</span>
+            <span class="exp-tag">Private LLM</span>
+            <span class="exp-tag">200+ Integrations</span>
           </div>
         </div>
       </div>
 
       <!-- Shukhibhava -->
-      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;">
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2017 — 2019</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div>2017 — 2019</div>
+          <div style="font-size:12px; color:#9CA3AF;">Hyderabad, India</div>
         </div>
         <div>
-          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
-            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Co-founder · Product Design</h3>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">Shukhibhava</span>
+          <h2 class="exp-company">Shukhibhava</h2>
+          <div class="exp-role">Co-founder & Product Design Lead</div>
+          <p class="exp-desc">Co-founded a healthcare SaaS platform connecting patients to validated holistic healthcare providers. Owned 0-to-1 product strategy, user discovery, mobile & web interface design, and early growth experimentation.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Healthcare SaaS</span>
+            <span class="exp-tag">Co-Founder</span>
+            <span class="exp-tag">0-to-1 Product</span>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0 0 12px;">Co-founded a healthcare SaaS platform connecting patients to holistic wellness providers. Led product strategy, UX, and early growth.</p>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;">
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Healthcare SaaS</span>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:9px;color:#888;background:#E8E5E0;border-radius:3px;padding:3px 8px;letter-spacing:0.06em;text-transform:uppercase;">Co-founder</span>
+        </div>
+      </div>
+
+      <!-- Earlier Experience -->
+      <div class="exp-item">
+        <div class="exp-meta">
+          <div>2013 — 2017</div>
+          <div style="font-size:12px; color:#9CA3AF;">Hyderabad, India</div>
+        </div>
+        <div>
+          <h2 class="exp-company">Various Enterprise & Startup Clients</h2>
+          <div class="exp-role">Senior UX Designer (Sears, eFundz, DigiCars)</div>
+          <p class="exp-desc">Designed large-scale enterprise fleet management systems (Sears), commercial loan originations (eFundz), and automotive marketplaces (DigiCars). Established foundational fluency across data-intensive workflows, fintech compliance, and supply chain logistics.</p>
+          <div class="exp-tags">
+            <span class="exp-tag">Fintech</span>
+            <span class="exp-tag">Fleet Logistics</span>
+            <span class="exp-tag">Design Systems</span>
           </div>
         </div>
       </div>
 
-      <!-- Earlier -->
-      <div style="display:grid;grid-template-columns:200px 1fr;gap:40px;padding:32px 0;border-top:1px solid #E8E5E0;border-bottom:1px solid #E8E5E0;">
-        <div>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;margin:0 0 4px;letter-spacing:0.04em;text-transform:uppercase;">2013 — 2017</p>
-          <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;margin:0;letter-spacing:0.04em;text-transform:uppercase;">Hyderabad</p>
-        </div>
-        <div>
-          <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:8px;">
-            <h3 style="font-family:'Outfit',sans-serif;font-size:17px;font-weight:700;color:#0D0D0D;margin:0;letter-spacing:-0.01em;">Senior UX Designer</h3>
-            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.04em;text-transform:uppercase;">Various · Sears, eFundz, DigiCars</span>
-          </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:14px;color:#666;line-height:1.7;margin:0;">Designed enterprise and consumer digital products across automotive, fintech, and fleet management — building the cross-domain fluency that underpins today's AI work.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SELECTED WORK -->
-<section style="background:#fff;padding:80px 40px;">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:40px;">
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#BBB;letter-spacing:0.12em;text-transform:uppercase;margin:0;">Selected work</p>
-      <a href="Portfolio.dc.html#work" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.06em;text-transform:uppercase;" style-hover="color:#0D0D0D">All projects →</a>
-    </div>
-
-    <a href="CS-NoCode.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">01</span>
-      <div>
-        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">No-Code Enterprise Platform</h3>
-        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">AI-generated enterprise apps — 90% cost reduction</p>
-      </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
-    </a>
-
-    <a href="CS-Stringer.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">02</span>
-      <div>
-        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Stringer — Private LLM Platform</h3>
-        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">Enterprise-secure AI chat running on a private LLM</p>
-      </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2019–24</span>
-    </a>
-
-    <a href="CS-Curaway.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">03</span>
-      <div>
-        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Curaway.ai — Agentic AI Health Concierge</h3>
-        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">End-to-end patient journey orchestrated by agentic AI</p>
-      </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
-    </a>
-
-    <a href="CS-DocAbstractor.dc.html" style="display:grid;grid-template-columns:48px 1fr auto;gap:20px;align-items:center;padding:24px 0;border-top:1px solid #E8E5E0;border-bottom:1px solid #E8E5E0;text-decoration:none;transition:background 0.15s;" class="work-row">
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;">04</span>
-      <div>
-        <h3 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:#0D0D0D;margin:0 0 3px;letter-spacing:-0.01em;">Capital Markets Document Abstractor — CBRE</h3>
-        <p style="font-family:'Outfit',sans-serif;font-size:13px;color:#888;margin:0;">AI extraction with confidence scoring and source traceability</p>
-      </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#666;letter-spacing:0.04em;flex-shrink:0;">2024–25</span>
-    </a>
-  </div>
-</section>
-
-<!-- CONTACT FOOTER -->
-<section style="background:#0D0D0D;padding:80px 40px;">
-  <div style="max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:40px;">
-    <div>
-      <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:#888;letter-spacing:0.1em;text-transform:uppercase;margin:0 0 16px;">Based in Hyderabad · Working worldwide</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:800;color:#fff;margin:0;letter-spacing:-0.02em;line-height:1.1;text-wrap:pretty;">Ready to build something<br><span style="color:#A8FF3E;">that actually works?</span></h2>
-    </div>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;">
-      <button onClick="{{ openModal }}" style="background:#A8FF3E;color:#0D0D0D;font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;padding:14px 28px;border-radius:4px;border:none;cursor:pointer;">Email me</button>
-      <a href="https://www.linkedin.com/in/gangi-reddy-suuda-02664b71" target="_blank" style="border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.65);font-family:'Outfit',sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border-radius:4px;display:inline-block;" style-hover="border-color:rgba(255,255,255,0.3)">LinkedIn ↗</a>
-      <a href="view_resume.html" target="_blank" style="border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.4);font-family:'JetBrains Mono',monospace;font-size:11px;padding:14px 20px;border-radius:4px;display:inline-block;letter-spacing:0.04em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.7)">Resume ↗</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer style="background:#080808;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,0.04);flex-wrap:wrap;gap:12px;">
-  <p style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.08em;text-transform:uppercase;">© 2026 Gangi Reddy Suuda</p>
-  <div style="display:flex;gap:20px;">
-    <a href="Portfolio.dc.html" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.06em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.5)">Portfolio</a>
-    <a href="view_resume.html" target="_blank" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(255,255,255,0.2);margin:0;letter-spacing:0.06em;text-transform:uppercase;" style-hover="color:rgba(255,255,255,0.5)">Resume</a>
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>© 2026 Gangi Reddy Suuda. All rights reserved.</span>
+    <span>Hyderabad, India · Working Worldwide</span>
   </div>
 </footer>
+
 </x-dc>
+
 <script type="text/x-dc" data-dc-script>
 class Component extends DCLogic {
   state = { modalOpen: false, submitted: false, name: '', email: '', mobile: '' };
-  componentDidMount() {
-    const st = document.createElement('style');
-    st.textContent = '.js-reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease}.js-reveal.revealed{opacity:1;transform:none}';
-    document.head.appendChild(st);
-    this._px = [];
-    document.querySelectorAll('section').forEach((sec, si) => {
-      if (si === 0) return;
-      Array.from(sec.children).forEach((el, i) => {
-        el.dataset.delay = String(i * 0.08);
-        el.classList.add('js-reveal');
-      });
-    });
-    document.querySelectorAll('section img').forEach((el) => {
-      el.style.willChange = 'transform';
-      this._px.push(el);
-    });
-    this._t = false;
-    this._onScroll = () => {
-      if (!this._t) {
-        requestAnimationFrame(() => { this._tick(); this._t = false; });
-        this._t = true;
-      }
-    };
-    window.addEventListener('scroll', this._onScroll, { passive: true });
-    this._tick();
-    this._io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          const d = parseFloat(e.target.dataset.delay || '0');
-          setTimeout(() => e.target.classList.add('revealed'), d * 1000);
-          this._io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.js-reveal').forEach((el) => this._io.observe(el));
-  }
-  _tick() {
-    const sy = window.scrollY;
-    this._px.forEach((el) => { el.style.transform = 'translateY(' + (-sy * 0.04) + 'px)'; });
-  }
-  componentWillUnmount() {
-    if (this._onScroll) window.removeEventListener('scroll', this._onScroll);
-    if (this._io) this._io.disconnect();
-  }
+
   renderVals() {
     const s = this.state;
     return {
@@ -375,11 +465,11 @@ class Component extends DCLogic {
       submit: () => {
         const { name, email, mobile } = this.state;
         if (!name.trim() || !email.trim()) return;
-        const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+        const subject = encodeURIComponent(`Portfolio inquiry from ${name}`);
         const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nMobile: ${mobile}`);
         window.open(`mailto:suudagangireddy@gmail.com?subject=${subject}&body=${body}`);
         this.setState({ submitted: true });
-        setTimeout(() => this.setState({ modalOpen: false, submitted: false, name: '', email: '', mobile: '' }), 3000);
+        setTimeout(() => this.setState({ modalOpen: false, submitted: false, name: '', email: '', mobile: '' }), 2500);
       },
     };
   }
